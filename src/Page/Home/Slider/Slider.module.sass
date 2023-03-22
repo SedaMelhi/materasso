@@ -1,11 +1,12 @@
 .sliders
     position: relative
+    transition: 1s all
 .slider
     display: flex
     flex-direction: column
     align-items: center
     justify-content: center
-    height: 656px
+    height: 680px
     margin-top: 32px
     border-radius: 15px
     background: url(./../../../assets/img/slider1.png) center/cover no-repeat
@@ -17,25 +18,31 @@
         background-image:  url(./../../../assets/img/slider4.png)
 
 .title
-    margin: 18px 0 50px
+    margin: 19px 0 49px
     color: var(--white)
     font-size: 4.4rem
     line-height: 4.5rem
 .subtitle
     text-transform: uppercase
     font-size: 1.25rem
-    line-height: 1.8rem
+    line-height: 1.35rem
     color: var(--btn2)
 .button
     display: flex
     align-items: center
     justify-content: center
-    height: 54px
-    padding: 0 24px
+    cursor: pointer
+    height: 52px
+    padding: 0 28px
     border: 1px solid var(--white)
     border-radius: 8px
     font-size: 1.25rem
     color: var(--white)
+    transition: .3s all linear
+    &:hover
+        background-color: var(--materasso)
+        border-color: var(--materasso)
+        box-shadow: 0px 0px 20px #000
     
 .arrows
     display: flex

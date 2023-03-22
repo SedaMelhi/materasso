@@ -1,15 +1,23 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
+import { Navigation, EffectFade, Autoplay } from 'swiper';
 import { Link } from 'react-router-dom';
 import style from './Slider.module.sass';
 import 'swiper/css';
+import 'swiper/css/effect-fade';
 const Slider = () => {
   return (
     <div className={style.sliders}>
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        modules={[Navigation]}
+        effect="fade"
+        modules={[Autoplay, Navigation, EffectFade]}
+        autoplay={{
+          delay: 3500,
+          pauseOnMouseEnter: false,
+          disableOnInteraction: false,
+        }}
+        speed={800}
         onSwiper={(swiper) => console.log(swiper)}
         navigation={{ prevEl: '.arrow-prev', nextEl: '.arrow-next' }}>
         <SwiperSlide>
