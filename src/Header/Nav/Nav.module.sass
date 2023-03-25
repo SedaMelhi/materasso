@@ -2,22 +2,30 @@
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 9px 0
+    height: 56px
     color: var(--white)
     &__wrap
         background-color: var(--materasso)
 
 .menu
     display: flex
+    @media (max-width:768px)
+        display: none
     &__item
         transition: .3s
         &:not(&:nth-child(1))
             margin-left: 32px
+            @media (max-width:768px)
+                 margin-left: 24px
         &:hover
             color: #677D99
     &__end
         display: flex
         align-items: center
+        @media (max-width:768px)
+            width: 100%
+            flex-direction: row-reverse
+            justify-content: space-between
 
 .select
     margin: 0 5px
@@ -28,4 +36,12 @@
     border-radius: 8px
     font-size: .9rem
     border: 1px solid var(--white)
+    @media (max-width:768px)
+        display: none
     
+.phone
+    display: none
+    margin-right: 24px
+    @media (max-width:768px)
+        display: block
+        margin-right: 0

@@ -1,7 +1,8 @@
+import style from './Cart.module.sass';
 const Cart = () => {
   return (
     <div>
-      <div className="cart">
+      <div className={style.cart}>
         <svg
           width="19"
           height="19"

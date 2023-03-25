@@ -21,6 +21,9 @@ const Nav = () => {
             </Link>
           </div>
           <div className={style.menu__end}>
+            <a href="tel:+79298981565" className={style.phone}>
+              + 7 (929) 898 - 15 - 65
+            </a>
             <div className={style.select}>Грозный</div>
             <button className={style.button}>Заказать звонок</button>
           </div>

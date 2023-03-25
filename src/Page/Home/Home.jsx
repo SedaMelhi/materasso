@@ -50,9 +50,9 @@ const Home = () => {
     },
   ];
   return (
-    <div className="wrap">
+    <div>
       <Slider />
-      <div className="main">
+      <div className="main wrap">
         {sections.map((item) => (
           <Section {...item} key={item.id} />
         ))}

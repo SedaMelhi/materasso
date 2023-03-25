@@ -1,7 +1,7 @@
 .menu
     display: flex
     justify-content: center
-    margin-top: 32px
+    flex-wrap: wrap
     &__item
         font-size: 1.25rem
         line-height: 2rem
@@ -13,3 +13,5 @@
             color: #677D99
         &_spec
             color:#E20918
+    @media (max-width: 768px)
+        display: none

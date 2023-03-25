@@ -18,7 +18,6 @@ const Slider = () => {
           disableOnInteraction: false,
         }}
         speed={800}
-        onSwiper={(swiper) => console.log(swiper)}
         navigation={{ prevEl: '.arrow-prev', nextEl: '.arrow-next' }}>
         <SwiperSlide>
           <div className={`${style.slider} ${style.slider__one}`}>

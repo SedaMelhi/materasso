@@ -20,7 +20,7 @@ const Section = ({ title, subtitle, description, url, id }) => {
           className={style.section__left}
           data-aos="fade-up"
           data-aos-easing="easy-out"
-          data-aos-duration="1000"
+          data-aos-duration="1500"
           data-aos-once="true">
           <div className={style.title}>{title}</div>
           <div className={style.subtitle}>{subtitle}</div>
@@ -31,7 +31,7 @@ const Section = ({ title, subtitle, description, url, id }) => {
           className={style.section__right}
           data-aos={id % 2 == 1 ? 'fade-left' : 'fade-right'}
           data-aos-easing="easy-out"
-          data-aos-duration="1000"
+          data-aos-duration="1500"
           data-aos-once="true">
           <div className="img" style={bg}></div>
         </div>

@@ -3,6 +3,8 @@
     box-sizing: border-box
 html
     font-size: 16px
+    @media (max-width: 1170px)
+        font-size: 15px
     &:root
         --grey: #F2F2F2
         --materasso: #131F2E
@@ -11,6 +13,7 @@ html
         --btn2: #304763
         --textGrey: #7B8E97
         --stroke: #CED3D6
+        --text: #0D1622
 body, h1, h2, h3, h4, h5, h6, p, li, ul
     margin: 0
     padding: 0
@@ -34,7 +37,10 @@ input
     max-width: 1500px
     padding: 0 64px
     margin: 0 auto
-
+    @media (max-width: 768px)
+        padding: 0 32px
+    @media (max-width: 560px)
+        padding: 0 24px
 button
     display: block
     color: inherit
