@@ -25,7 +25,9 @@ const Section = ({ title, subtitle, description, url, id }) => {
           <div className={style.title}>{title}</div>
           <div className={style.subtitle}>{subtitle}</div>
           <div className={style.description}>{description}</div>
-          <Button text="Подробнее" />
+          <div className={style.btn}>
+            <Button text="Подробнее" />
+          </div>
         </div>
         <div
           className={style.section__right}
@@ -34,6 +36,9 @@ const Section = ({ title, subtitle, description, url, id }) => {
           data-aos-duration="1500"
           data-aos-once="true">
           <div className="img" style={bg}></div>
+        </div>
+        <div className={style.btn__mobile}>
+          <Button text="Подробнее" />
         </div>
       </div>
     </section>

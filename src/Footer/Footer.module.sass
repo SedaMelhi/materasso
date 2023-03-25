@@ -4,27 +4,46 @@ footer
     padding: 48px 0
 
 .logo
-    width: 119px
-    svg
-        width: 100%
+    img
+        width: 119px     
+        @media (max-width: 360px)
+            width: 90px
+        @media (max-width: 300px)
+            width: 70px
 
 .footer
     display: flex
     justify-content: space-between
     &__right
         display: flex
-        width: 860px
+        width: 800px
+        margin-left: 50px
         justify-content: space-between
-
+        @media (max-width: 768px)
+            width: auto
+        @media (max-width: 460px)
+            margin: 0
+    @media (max-width: 460px)
+        flex-direction: row-reverse
+    @media (max-width: 360px)
+        align-items: flex-end
+    @media (max-width: 300px)
+        font-size: 0.8rem
+.title
+    display: none     
+    
 .column
     display: flex
     flex-direction: column
     max-width: 270px
     color: var(--white)
-
+    &:nth-child(1), &:nth-child(2)
+        @media (max-width: 768px)
+            display: none
 .link
     margin-bottom: 16px
-
+    @media (max-width: 300px)
+        margin-bottom: 8px
 .networks
     display: flex
 
@@ -39,6 +58,8 @@ footer
     background-color: var(--btn)
     svg
         fill: #fff    
+    @media (max-width: 300px)
+        transform: scale(.8)
 
 .inst
     &:hover
@@ -46,7 +67,9 @@ footer
         svg
             fill: #cc397a
 .telega
-    margin: 0 16px       
+    margin: 0 16px      
+    @media (max-width: 460px)
+        margin: 0 8px 
     &:hover
         background-color: #0088CC04
         svg

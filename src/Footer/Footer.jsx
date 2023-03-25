@@ -38,6 +38,7 @@ const Footer = () => {
               </Link>
             </div>
             <div className={style.column}>
+              <h3 className={style.title}>Контакты</h3>
               <Link to="/" className={style.link}>
                 alievmagomed@info.com
               </Link>

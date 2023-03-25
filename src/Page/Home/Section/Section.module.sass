@@ -5,11 +5,19 @@
     &__left
         width: 38%
         margin-right: 20px
+        @media (max-width: 768px)
+            width: 100%
+            margin-right: 0px
+        
     &__right
         width: 56%
         border-radius: 15px
+        @media (max-width: 768px)
+            width: 100%
     &__reverse
         flex-direction: row-reverse
+    @media (max-width: 768px)
+        flex-direction: column
 
 .title
     font-size: 2rem
@@ -27,4 +35,15 @@
 .description
     color: var(--materasso)
     margin-bottom: 48px
+    @media (max-width: 768px)
+        margin-bottom: 32px
 
+.btn
+    @media (max-width: 768px)
+        display: none
+    &__mobile
+        display: none
+        @media (max-width: 768px)
+            display: block
+            margin-top: 32px
+    
