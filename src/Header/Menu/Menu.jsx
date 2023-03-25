@@ -4,11 +4,6 @@ const Menu = () => {
   return (
     <div className="wrap">
       <div className={style.menu__wrap}>
-        <div className={style.hamburger + ' ' + style.line__active}>
-          <div className={style.line + ' ' + style.line__one}></div>
-          <div className={style.line + ' ' + style.line__middle}></div>
-          <div className={style.line + ' ' + style.line__three}></div>
-        </div>
         <div className={style.menu}>
           <Link to="/" className={style.menu__item}>
             Каталог
