@@ -15,7 +15,7 @@ const Section = ({ title, subtitle, description, url, id }) => {
   }, []);
   return (
     <section>
-      <div className={`${style.section} ${id % 2 == 1 ? style.section__reverse : ''}`}>
+      <div className={`${style.section} ${id % 2 === 1 ? style.section__reverse : ''}`}>
         <div
           className={style.section__left}
           data-aos="fade-up"
@@ -31,7 +31,7 @@ const Section = ({ title, subtitle, description, url, id }) => {
         </div>
         <div
           className={style.section__right}
-          data-aos={id % 2 == 1 ? 'fade-left' : 'fade-right'}
+          data-aos={id % 2 === 1 ? 'fade-left' : 'fade-right'}
           data-aos-easing="easy-out"
           data-aos-duration="1500"
           data-aos-once="true">

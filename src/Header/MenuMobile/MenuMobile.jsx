@@ -5,7 +5,7 @@ const MenuMobile = ({ menuState }) => {
   const menu = [
     {
       name: 'Каталог',
-      link: '/',
+      link: '/catalog',
       items: [
         { name: 'Диваны', link: '/' },
         { name: 'Кровати и изголовья', link: '/' },
@@ -40,7 +40,7 @@ const MenuMobile = ({ menuState }) => {
         { name: 'Тиволи wood', link: '/' },
       ],
     },
-    { name: 'Sale', link: '/' },
+    { name: 'Sale', link: '/sale' },
     { name: 'Спальни', link: '/' },
     { name: 'Матрасы', link: '/' },
     { name: 'Мягкая мебель', link: '/' },

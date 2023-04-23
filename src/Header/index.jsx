@@ -10,9 +10,11 @@ import style from './Header.module.sass';
 
 import { useState } from 'react';
 import Hamburger from './Hamburger/Hamburger';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header>
       <Nav />
@@ -23,7 +25,9 @@ const Header = () => {
             <a href="tel:+79298981565">+ 7 (929) 898 - 15 - 65</a>
           </div>
           <div className={style.logo}>
-            <img src={logo} alt="materasso" />
+            <Link to="/">
+              <img src={logo} alt="materasso" />
+            </Link>
           </div>
           <div className={style.header__end}>
             <Cart />

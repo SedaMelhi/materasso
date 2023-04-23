@@ -1,0 +1,54 @@
+.wrap
+    position: relative
+.filter
+    &__wrap
+        display: flex
+        align-items: center
+        margin-top: 32px
+        padding-bottom: 48px
+        @media (max-width: 560px)
+            display: none
+    display: flex
+    align-items: center
+    color: var(--textGrey)
+    font-size: 1.25rem
+    line-height: 2rem
+    cursor: pointer
+.arrow
+    margin-left: 10px
+    text-align: center
+    transition: .2s linear
+    svg
+        width: 9px
+    &__close
+        transform: rotate(-180deg)
+.select
+    position: absolute
+    display: none
+    width: 170px
+    border-radius: 8px
+    border: 1px solid var(--stroke)
+    background-color: #fff
+    font-size: 1rem
+    line-height: 1.4rem
+    color: var(--textGrey)
+    padding: 6px 0
+    animation: show .2s linear forwards
+    z-index: 3
+    &__show
+        display: block
+    &__item
+        display: flex
+        padding: 6px 12px
+        cursor: pointer
+        &:hover
+            color: var(--btn2)
+    @keyframes show
+        0%
+            top: 55px
+        100%
+            top: 65px
+.input
+    &:checked
+        & + .text
+            color: var(--btn2)

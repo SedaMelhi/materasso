@@ -1,0 +1,28 @@
+.breadcrumbs
+    display: flex
+    margin-bottom: 4px
+    transition: .2s 
+    
+.breadcrumb
+    position: relative
+    padding: 6px 12px
+    background-color: rgba(206, 211, 214, 0.2)
+    color: var(--btn)
+    line-height: 1.5rem
+    border-radius: 8px
+    margin-right: 7px
+    height: 36px
+    margin-bottom: 12px
+    transition: .2s 
+    cursor: pointer
+    &:first-child
+        height: 0
+        margin-bottom: 0
+        animation: show .2s 1 forwards
+        @keyframes show
+            0%
+                height: 0
+                margin-bottom: 0
+            100%
+                height: 36px
+                margin-bottom: 12px

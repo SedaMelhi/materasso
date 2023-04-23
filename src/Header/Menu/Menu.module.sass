@@ -2,16 +2,68 @@
     display: flex
     justify-content: center
     flex-wrap: wrap
+    &__wrap
+        position: relative
     &__item
         font-size: 1.25rem
         line-height: 2rem
         text-transform: uppercase
         color: var(--materasso)
         margin: 0 16px
-        transition: .2s
+        transition: .3s
         &:hover
-            color: #677D99
+            color: #131F2E60
         &_spec
             color:#E20918
+            &:hover
+                color: #e20918
     @media (max-width: 768px)
+        display: none    
+.dropdown
+    display: grid
+    grid-template-columns: 1.3fr 1fr 1fr
+    gap: 20px
+    row-gap: 60px
+    max-width: 1200px
+    margin: 12px auto 0    
+    padding: 32px
+    background-color: #fff
+    border-radius: 15px
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1)
+    opacity: 0
+    animation: show .2s ease-in 1 forwards
+    @keyframes show
+        0%
+            opacity: 0
+        100%
+            opacity: 1
+    &__wrap
+        position: absolute
+        margin: 0 auto    
+        left: 0
+        right: 0
+        z-index: 2
         display: none
+    &__title
+        text-transform: uppercase
+        font-weight: 500
+        color: var(--materasso)
+        line-height: 1.8rem
+        font-size: 1.25rem
+        margin-bottom: 8px
+    &__menu
+        font-size: 1rem
+        text-transform: none
+        color: var(--btn2)
+        line-height: 1.5rem
+        transition: .3s linear
+        &:hover
+            color: var(--materasso)
+            text-decoration: underline
+
+.catalog
+    &:hover
+        .dropdown
+            &__wrap
+                display: block
+            
