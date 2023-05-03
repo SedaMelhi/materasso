@@ -1,0 +1,22 @@
+.catalog
+    margin-top: 80px
+.products
+    margin-top: 48px
+.description
+    color: var(--text)
+    font-size: 1.25rem
+    line-height: 2rem
+    text-align: center
+    margin-bottom: 10px
+    position: relative
+    top: -16px
+.skeleton
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    gap: 24px
+    @media (max-width: 560px)
+        flex-direction: column
+    @media (max-width: 1000px)
+        grid-template-columns: 1fr 1fr
+    @media (max-width: 560px)
+        grid-template-columns: 1fr

@@ -1,10 +1,21 @@
 import style from './Filter.module.sass';
 import ArrowSvg from '../../assets/svg/ArrowSvg';
-import { useState } from 'react';
-
-const Filter = ({ category, setCategory }) => {
-  const filterItems = ['Модульные диваны', 'Угловые диваны', 'Прямые диваны', 'Все'];
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+const Filter = ({ category, setCategory, menu, setSubId }) => {
   const [selectShow, setSelectShow] = useState(false);
+  const [filterItems, setFilterItems] = useState([]);
+  const id = useSelector((state) => state.catalog.categoryId);
+  useEffect(() => {
+    menu.forEach(({ products }) => {
+      products.forEach((item) => {
+        if (+id === item.id) {
+          setFilterItems(item.subcategories);
+        }
+      });
+    });
+  }, [id, menu]);
+
   return (
     <div className={style.wrap}>
       <div
@@ -25,32 +36,41 @@ const Filter = ({ category, setCategory }) => {
               : category
             : 'Фильтры'}
         </div>
-        <div className={style.arrow + ' ' + (selectShow ? style.arrow__close : '')}>
+        <div
+          className={
+            style.arrow +
+            ' ' +
+            (filterItems.length > 0 ? (selectShow ? style.arrow__close : '') : '')
+          }>
           <ArrowSvg />
         </div>
-        <div className={style.select + ' ' + (selectShow ? style.select__show : '')}>
-          {filterItems.map((item, i) => (
-            <label
-              key={i}
-              className={style.select__item}
-              htmlFor={'select0' + i}
-              onClick={(event) => {
-                setCategory(event.target.innerText);
-              }}>
-              <input
-                type="radio"
-                name="filter"
-                value={item}
-                id={'select0' + i}
-                className={style.input + ' hidden'}
+        {filterItems.length > 0 && (
+          <div className={style.select + ' ' + (selectShow ? style.select__show : '')}>
+            {filterItems.map(({ name, id }) => (
+              <label
+                key={id}
+                className={style.select__item}
+                htmlFor={'select0' + id}
                 onClick={(event) => {
-                  event.stopPropagation();
-                }}
-              />
-              <div className={style.text}>{item}</div>
-            </label>
-          ))}
-        </div>
+                  setCategory(event.target.innerText);
+                  setSubId(id);
+                  //https://storefurniture.pythonanywhere.com/api/product/?subcategory=5
+                }}>
+                <input
+                  type="radio"
+                  name="filter"
+                  value={name}
+                  id={'select0' + id}
+                  className={style.input + ' hidden'}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                  }}
+                />
+                <div className={style.text}>{name}</div>
+              </label>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

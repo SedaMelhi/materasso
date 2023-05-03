@@ -1,0 +1,23 @@
+.top
+    display: flex
+    justify-content: space-between
+    
+.skeleton
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    gap: 24px
+    @media (max-width: 560px)
+        flex-direction: column
+    @media (max-width: 1000px)
+        grid-template-columns: 1fr 1fr
+    @media (max-width: 560px)
+        grid-template-columns: 1fr
+.none
+    font-size: 1.3rem
+    height: 270px
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-top: 100px
+    text-align: center
+    

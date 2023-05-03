@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import style from './Sale.module.sass';
 
@@ -10,94 +11,29 @@ import Products from '../../Products/Products';
 import Title from '../../components/Title/Title';
 import Line from '../../components/Line/Line';
 
-const Sale = () => {
+const Sale = ({ menu }) => {
+  const [products, setProducts] = useState([]);
   const [category, setCategory] = useState('');
   const [sort, setSort] = useState('Сначала новые');
-  const products = [
-    {
-      sale: 25,
-      img: 'img/products/product1.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 1,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product2.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 2,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product3.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 3,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product4.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 4,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product5.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 5,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product6.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 6,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product7.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 7,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product8.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 8,
-    },
-    {
-      sale: 25,
-      img: 'img/products/product9.png',
-      type: 'Угловые диваны',
-      price: '134 900 ₽',
-      subtitle: 'Диван Альби угловой правый черно-белое букле',
-      id: 9,
-    },
-  ];
-  fetch('http://storefurniture.pythonanywhere.com/api/product/?category=1')
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+  const id = useSelector((state) => state.catalog.categoryId);
+  useEffect(() => {
+    fetch('https://storefurniture.pythonanywhere.com/api/product/')
+      .then((res) => res.json())
+      .then((data) => setProducts(data.results.filter((item) => item.sale > 0)));
+  }, []);
+  useEffect(() => {
+    fetch('https://storefurniture.pythonanywhere.com/api/product/?category=' + id)
+      .then((res) => res.json())
+      .then((data) => setProducts(data.results.filter((item) => item.sale > 0)));
+  }, [id]);
   return (
     <div className={style.sale + ' wrap'}>
       <Path />
       <Title title="Распродажа" />
-      <Breadcrumbs category={category} setCategory={setCategory} />
+      {/* <Breadcrumbs category={category} setCategory={setCategory} /> */}
       <Line />
       <div className={style.top}>
-        <Filter setCategory={setCategory} category={category} />
+        {/* <Filter setCategory={setCategory} category={category} menu={menu} sale={true} /> */}
         <Sort sort={sort} setSort={setSort} />
       </div>
       <Products products={products} />

@@ -1,22 +1,58 @@
 import style from './Products.module.sass';
 import bread from '../Page/Sale/Breadcrumbs/Breadcrumbs.module.sass';
+import { useDispatch } from 'react-redux';
+import { setCategoryId, setName, setProduct } from './../redux/catalogSlice/catalogSlice';
+import { Link } from 'react-router-dom';
 
-const Products = ({ products }) => {
+const Products = ({ products, catalog }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className={style.products}>
-      {products.map(({ sale, img, type, price, subtitle, id, title }) => (
-        <div className={style.product} key={id}>
-          <div
-            className={style.product__img}
-            style={{ background: 'url(' + img + ') center/100% no-repeat' }}>
-            {sale ? <div className={style.sale}>-{sale}</div> : ''}
-          </div>
-          {title ? <div className={style.title}>{title}</div> : ''}
-          {type ? <div className={bread.breadcrumb + ' ' + style.type}>{type}</div> : ''}
-          {price ? <div className={style.price}>{price}</div> : ''}
-          {subtitle ? <div className={style.subtitle}>{subtitle}</div> : ''}
-        </div>
-      ))}
+      {products.map(
+        ({ sale, images, image, subcategory, price, short_description, id, name_category }) => (
+          <Link
+            to={catalog ? '../catalog' : '../product'}
+            key={id}
+            onClick={
+              catalog
+                ? () => {
+                    dispatch(setCategoryId(id));
+                    dispatch(setName(name_category));
+                  }
+                : () => {
+                    dispatch(setProduct(id));
+                  }
+            }>
+            <div className={style.product}>
+              {images && (
+                <div
+                  className={style.product__img}
+                  style={{ background: 'url(' + images[0].image + ') center/100% no-repeat' }}>
+                  {sale ? <div className={style.sale}>-{sale}</div> : ''}
+                </div>
+              )}
+              {image && (
+                <div
+                  className={style.product__img}
+                  style={{ background: 'url(' + image + ') center/100% no-repeat' }}>
+                  {sale ? <div className={style.sale}>-{sale}</div> : ''}
+                </div>
+              )}
+              {name_category ? <div className={style.title}>{name_category}</div> : ''}
+              {subcategory
+                ? subcategory.map(({ name, id }) => (
+                    <div key={id} className={bread.breadcrumb + ' ' + style.type}>
+                      {name}
+                    </div>
+                  ))
+                : ''}
+              {price ? <div className={style.price}>{price}</div> : ''}
+              {short_description ? <div className={style.subtitle}>{short_description}</div> : ''}
+            </div>
+          </Link>
+        ),
+      )}
     </div>
   );
 };

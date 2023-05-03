@@ -6,17 +6,48 @@ import Header from './Header';
 import Home from './Page/Home/Home';
 import Footer from './Footer/Footer';
 import Sale from './Page/Sale';
-import Catalog from './Catalog/Catalog';
+import Categories from './Page/Categories/Categories';
+import Product from './Page/Product/Product';
+import Catalog from './Page/Catalog/Catalog';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [menu, setMenu] = useState([]);
+  useEffect(() => {
+    fetch('http://storefurniture.pythonanywhere.com/api/menu/')
+      .then((res) => res.json())
+      .then((menu) => {
+        fetch('http://storefurniture.pythonanywhere.com/api/alldata/')
+          .then((res) => res.json())
+          .then((categories) => {
+            menu.map((item) => (item.products = []));
+            categories.forEach(({ id, menu_item, name_category, subcategories }) =>
+              menu.map((item) =>
+                item.id === menu_item.id
+                  ? item.products.push({
+                      id: id,
+                      name_category: name_category,
+                      subcategories: subcategories,
+                    })
+                  : false,
+              ),
+            );
+            setMenu(menu);
+          });
+      });
+  }, []);
   return (
     <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="sale" element={<Sale />} />
-        <Route path="catalog" element={<Catalog />} />
-      </Routes>
+      <Header menu={menu} />
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="sale" element={<Sale menu={menu} />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="product" element={<Product />} />
+          <Route path="catalog" element={<Catalog menu={menu} />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );

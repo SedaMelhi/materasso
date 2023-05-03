@@ -12,7 +12,7 @@ import { useState } from 'react';
 import Hamburger from './Hamburger/Hamburger';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ menu }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -34,9 +34,9 @@ const Header = () => {
             <Search />
           </div>
         </div>
-        <MenuMobile menuState={menuOpen} />
+        {menu && <MenuMobile menuState={menuOpen} catalog={menu} setMenuOpen={setMenuOpen} />}
       </div>
-      <Menu />
+      {menu && <Menu menu={menu} />}
     </header>
   );
 };

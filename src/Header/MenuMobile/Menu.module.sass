@@ -8,10 +8,16 @@
     padding-bottom: 70px
     transform: translateX(-100vw)
     border-bottom: 1px solid #CED3D680
+    display: none
+    @media(max-width: 768px) 
+        display: block
+        
+    
 
 .menu
-    display: none
     flex-direction: column
+    &__wrap
+        position: relative
     &__item
         display: flex
         align-items: center
