@@ -2,15 +2,21 @@ import style from './Pagination.module.sass';
 import ReactPaginate from 'react-paginate';
 import NextSvg from '../../assets/svg/NextSvg';
 import PreviousSvg from '../../assets/svg/PreviousSvg';
-
-import { useSelector } from 'react-redux';
-
+import { setFilters } from './../../redux/catalogSlice/catalogSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const Pagination = ({ itemsPerPage, count, getData, url }) => {
-  const id = useSelector((state) => state.catalog.categoryId);
+  const filters = useSelector((state) => state.catalog.filters);
   const pageCount = Math.ceil((count || 0) / itemsPerPage);
-
+  const dispatch = useDispatch();
   const handlePageClick = (event) => {
-    getData(url, id, event.selected + 1);
+    dispatch(
+      setFilters({
+        categoryId: filters.categoryId,
+        name: filters.name,
+        subId: filters.subId,
+        page: event.selected + 1,
+      }),
+    );
   };
   return (
     <div className="wrap">
@@ -20,7 +26,7 @@ const Pagination = ({ itemsPerPage, count, getData, url }) => {
           className={style.pagination}
           previousClassName={style.previous}
           nextClassName={style.next}
-          key={id}
+          key={filters.categoryId}
           pageClassName={style.number}
           activeClassName={style.active}
           nextLabel={<NextSvg />}

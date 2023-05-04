@@ -1,12 +1,11 @@
 import style from './Products.module.sass';
 import bread from '../Page/Sale/Breadcrumbs/Breadcrumbs.module.sass';
 import { useDispatch } from 'react-redux';
-import { setCategoryId, setName, setProduct } from './../redux/catalogSlice/catalogSlice';
+import { setFilters, setProduct } from './../redux/catalogSlice/catalogSlice';
 import { Link } from 'react-router-dom';
 
 const Products = ({ products, catalog }) => {
   const dispatch = useDispatch();
-
   return (
     <div className={style.products}>
       {products.map(
@@ -17,11 +16,10 @@ const Products = ({ products, catalog }) => {
             onClick={
               catalog
                 ? () => {
-                    dispatch(setCategoryId(id));
-                    dispatch(setName(name_category));
+                    dispatch({ categoryId: id, name: name_category, subId: false, page: 1 });
                   }
                 : () => {
-                    dispatch(setProduct(id));
+                    dispatch({ categoryId: id, name: '', subId: false, page: 1 });
                   }
             }>
             <div className={style.product}>

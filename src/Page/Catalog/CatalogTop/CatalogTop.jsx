@@ -7,13 +7,12 @@ import Filter from '../../../components/Filter/Filter';
 import Sort from '../../../components/Sort/Sort';
 import style from './../Catalog.module.sass';
 const CatalogTop = ({ menu, category, setCategory }) => {
-  const nameCategory = useSelector((state) => state.catalog.name);
-  const subId = useSelector((state) => state.catalog.subId);
+  const filters = useSelector((state) => state.catalog.filters);
   const [sort, setSort] = useState('Сначала новые');
   return (
     <div>
-      <Title title={nameCategory} />
-      {category && subId && <Breadcrumbs category={category} setCategory={setCategory} />}
+      <Title title={filters.name} />
+      {category && filters.subId && <Breadcrumbs category={category} setCategory={setCategory} />}
       <Line />
       <div className={style.top}>
         <Filter setCategory={setCategory} category={category} menu={menu} />

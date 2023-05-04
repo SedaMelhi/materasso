@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { setCategoryId, setName } from './../../redux/catalogSlice/catalogSlice';
+import { setFilters } from './../../redux/catalogSlice/catalogSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
     ],
     [],
   );
-  const id = useSelector((state) => state.catalog.categoryId);
+  const filters = useSelector((state) => state.catalog.filters);
   const [menu, setMenu] = useState(data);
   const [title, setTitle] = useState(false);
   const [menuItems, setMenuItems] = useState(menu);
@@ -82,10 +82,9 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
   useEffect(() => {
     setMenuItems(menu);
     setTitle(false);
-  }, [id, menu]);
+  }, [filters, menu]);
   const changeId = (id, name) => {
-    dispatch(setCategoryId(id));
-    dispatch(setName(name));
+    dispatch(setFilters({ categoryId: id, name: name, subId: false, page: 1 }));
   };
   return (
     <div className={style.menu__wrap}>

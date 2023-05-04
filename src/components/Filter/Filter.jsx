@@ -2,22 +2,22 @@ import style from './Filter.module.sass';
 import ArrowSvg from '../../assets/svg/ArrowSvg';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { setSubId } from './../../redux/catalogSlice/catalogSlice';
+import { setFilters } from './../../redux/catalogSlice/catalogSlice';
 import { useDispatch } from 'react-redux';
 const Filter = ({ category, setCategory, menu }) => {
   const [selectShow, setSelectShow] = useState(false);
   const [filterItems, setFilterItems] = useState([]);
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.catalog.categoryId);
+  const filters = useSelector((state) => state.catalog.filters);
   useEffect(() => {
     menu.forEach(({ products }) => {
       products.forEach((item) => {
-        if (+id === item.id) {
+        if (+filters.categoryId === item.id) {
           setFilterItems(item.subcategories);
         }
       });
     });
-  }, [id, menu]);
+  }, [filters, menu]);
 
   return (
     <div className={style.wrap}>
@@ -56,8 +56,14 @@ const Filter = ({ category, setCategory, menu }) => {
                 htmlFor={'select0' + id}
                 onClick={(event) => {
                   setCategory(event.target.innerText);
-                  dispatch(setSubId(id));
-                  //https://storefurniture.pythonanywhere.com/api/product/?subcategory=5
+                  dispatch(
+                    setFilters({
+                      categoryId: filters.categoryId,
+                      name: filters.name,
+                      subId: id,
+                      page: 1,
+                    }),
+                  );
                 }}>
                 <input
                   type="radio"

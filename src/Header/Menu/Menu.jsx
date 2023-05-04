@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setCategoryId, setName, setSubId } from './../../redux/catalogSlice/catalogSlice';
+import { setFilters } from './../../redux/catalogSlice/catalogSlice';
 
 import DropMenu from './DropMenu/DropMenu';
 
@@ -8,7 +8,6 @@ import style from './Menu.module.sass';
 
 const Menu = ({ menu }) => {
   const dispatch = useDispatch();
-
   return (
     <div className="wrap">
       <div className={style.menu__wrap}>
@@ -42,8 +41,14 @@ const Menu = ({ menu }) => {
                         to="/catalog"
                         className={style.menu__item}
                         onClick={() => {
-                          dispatch(setCategoryId(item.id));
-                          dispatch(setName(item.name_category));
+                          dispatch(
+                            setFilters({
+                              categoryId: item.id,
+                              name: item.name_category,
+                              subId: false,
+                              page: 1,
+                            }),
+                          );
                         }}>
                         {name}
                       </Link>

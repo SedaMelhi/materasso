@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import style from './../Menu.module.sass';
 import { useDispatch } from 'react-redux';
-import { setCategoryId, setName } from './../../../redux/catalogSlice/catalogSlice';
+import { setFilters } from './../../../redux/catalogSlice/catalogSlice';
 const DropMenu = ({ menu, catalog, name }) => {
   const dispatch = useDispatch();
 
@@ -20,8 +20,14 @@ const DropMenu = ({ menu, catalog, name }) => {
                         className={style.dropdown__menu}
                         key={item.id}
                         onClick={() => {
-                          dispatch(setCategoryId(item.id));
-                          dispatch(setName(item.name_category));
+                          dispatch(
+                            setFilters({
+                              categoryId: item.id,
+                              name: item.name_category,
+                              subId: false,
+                              page: 1,
+                            }),
+                          );
                         }}>
                         <Link to="/catalog">{item.name_category}</Link>
                       </div>
@@ -37,8 +43,9 @@ const DropMenu = ({ menu, catalog, name }) => {
               className={style.dropdown__menu}
               key={id}
               onClick={() => {
-                dispatch(setCategoryId(id));
-                dispatch(setName(name_category));
+                dispatch(
+                  setFilters({ categoryId: id, name: name_category, subId: false, page: 1 }),
+                );
               }}>
               <Link to="/catalog">{name_category}</Link>
             </div>
