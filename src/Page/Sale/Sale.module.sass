@@ -20,3 +20,13 @@
 .count
     text-align: center
     color: var(--textGrey)
+.skeleton
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    gap: 24px
+    @media (max-width: 560px)
+        flex-direction: column
+    @media (max-width: 1000px)
+        grid-template-columns: 1fr 1fr
+    @media (max-width: 560px)
+        grid-template-columns: 1fr
