@@ -32,7 +32,6 @@ const Catalog = ({ menu }) => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      console.log(params);
       fetch('https://storefurniture.pythonanywhere.com/api/alldata/')
         .then((res) => res.json())
         .then((data) => {
@@ -66,6 +65,7 @@ const Catalog = ({ menu }) => {
         <Pagination
           itemsPerPage={9}
           count={catalog.count}
+          page={filters.page - 1}
           getData={getData}
           url="https://storefurniture.pythonanywhere.com/api/product/"
         />

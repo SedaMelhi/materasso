@@ -1,31 +1,53 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Pagination from '../../components/Pagination';
 import ContentLoader from 'react-content-loader';
-import style from './Sale.module.sass';
-
-import Filter from '../../components/Filter/Filter';
 import Path from '../../components/Path/Path';
-import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 import Sort from '../../components/Sort/Sort';
 import Products from '../../Products/Products';
 import Title from '../../components/Title/Title';
 import Line from '../../components/Line/Line';
+import style from './Sale.module.sass';
+import qs from 'qs';
+import { setPage } from '../../redux/saleSlice/saleSlice';
+import { setFilters } from './../../redux/catalogSlice/catalogSlice';
 
 const Sale = ({ menu }) => {
-  const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState('');
+  const [data, setData] = useState({ results: [] });
   const [sort, setSort] = useState('Сначала новые');
   const [load, setLoad] = useState(false);
-  const id = useSelector((state) => state.catalog.categoryId);
-  useEffect(() => {
-    fetch('https://storefurniture.pythonanywhere.com/api/product/')
+  const [update, setUpdate] = useState(false);
+  const navigate = useNavigate();
+  const page = useSelector((state) => state.sale.page);
+  const dispatch = useDispatch();
+
+  const getData = () => {
+    fetch('https://storefurniture.pythonanywhere.com/api/product/?sale__gt=0&page=' + page)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.results.filter((item) => item.sale > 0));
+        setData(data);
         setLoad(true);
       });
+    navigate('?page=' + page);
+  };
+  useEffect(() => {
+    setLoad(false);
+    if (update) {
+      getData();
+    }
+  }, [page, update]);
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      dispatch(setPage(+params.page));
+    }
+    setUpdate(true);
+    dispatch(setFilters({ categoryId: false, name: '', subId: false, page: 1 }));
+    return () => {
+      dispatch(setPage(1));
+    };
   }, []);
-
   return (
     <div className={style.sale + ' wrap'}>
       <Path />
@@ -38,7 +60,7 @@ const Sale = ({ menu }) => {
       </div>
 
       {load ? (
-        <Products products={products} />
+        <Products products={data.results} />
       ) : (
         <div className={style.skeleton}>
           {[...new Array(9)].map((item, i) => (
@@ -61,6 +83,16 @@ const Sale = ({ menu }) => {
         <span className={style.count__show}>33</span> /{' '}
         <span className={style.count__all}>108</span> товаров
       </div>
+      {data.count > 9 && (
+        <Pagination
+          itemsPerPage={9}
+          count={data.count}
+          getData={getData}
+          page={page - 1}
+          sale={true}
+          url="https://storefurniture.pythonanywhere.com/api/product/"
+        />
+      )}
     </div>
   );
 };

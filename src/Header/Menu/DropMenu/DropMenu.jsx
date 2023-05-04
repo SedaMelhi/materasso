@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import style from './../Menu.module.sass';
 import { useDispatch } from 'react-redux';
 import { setFilters } from './../../../redux/catalogSlice/catalogSlice';
+import { setPage } from '../../../redux/saleSlice/saleSlice';
 const DropMenu = ({ menu, catalog, name }) => {
   const dispatch = useDispatch();
 
@@ -28,6 +29,7 @@ const DropMenu = ({ menu, catalog, name }) => {
                               page: 1,
                             }),
                           );
+                          dispatch(setPage(1));
                         }}>
                         <Link to="/catalog">{item.name_category}</Link>
                       </div>

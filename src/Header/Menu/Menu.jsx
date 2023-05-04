@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setFilters } from './../../redux/catalogSlice/catalogSlice';
-
 import DropMenu from './DropMenu/DropMenu';
 
 import style from './Menu.module.sass';

@@ -16,10 +16,12 @@ const Products = ({ products, catalog }) => {
             onClick={
               catalog
                 ? () => {
-                    dispatch({ categoryId: id, name: name_category, subId: false, page: 1 });
+                    dispatch(
+                      setFilters({ categoryId: id, name: name_category, subId: false, page: 1 }),
+                    );
                   }
                 : () => {
-                    dispatch({ categoryId: id, name: '', subId: false, page: 1 });
+                    //dispatch(setFilters{ categoryId: id, name: '', subId: false, page: 1 });
                   }
             }>
             <div className={style.product}>
