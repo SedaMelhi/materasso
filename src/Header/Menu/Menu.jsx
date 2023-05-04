@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setCategoryId, setName } from './../../redux/catalogSlice/catalogSlice';
+import { setCategoryId, setName, setSubId } from './../../redux/catalogSlice/catalogSlice';
 
 import DropMenu from './DropMenu/DropMenu';
 

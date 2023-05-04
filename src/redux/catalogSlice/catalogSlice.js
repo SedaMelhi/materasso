@@ -3,9 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 export const catalogSlice = createSlice({
   name: 'catalog',
   initialState: {
-    categoryId: 1,
+    categoryId: false,
     name: '',
     product: 0,
+    subId: false,
   },
   reducers: {
     setCategoryId(state, { payload }) {
@@ -17,10 +18,13 @@ export const catalogSlice = createSlice({
     setProduct(state, { payload }) {
       state.product = payload;
     },
+    setSubId(state, { payload }) {
+      state.subId = payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCategoryId, setName, setProduct } = catalogSlice.actions;
+export const { setCategoryId, setName, setProduct, setSubId } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

@@ -2,9 +2,12 @@ import style from './Filter.module.sass';
 import ArrowSvg from '../../assets/svg/ArrowSvg';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-const Filter = ({ category, setCategory, menu, setSubId }) => {
+import { setSubId } from './../../redux/catalogSlice/catalogSlice';
+import { useDispatch } from 'react-redux';
+const Filter = ({ category, setCategory, menu }) => {
   const [selectShow, setSelectShow] = useState(false);
   const [filterItems, setFilterItems] = useState([]);
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.catalog.categoryId);
   useEffect(() => {
     menu.forEach(({ products }) => {
@@ -53,7 +56,7 @@ const Filter = ({ category, setCategory, menu, setSubId }) => {
                 htmlFor={'select0' + id}
                 onClick={(event) => {
                   setCategory(event.target.innerText);
-                  setSubId(id);
+                  dispatch(setSubId(id));
                   //https://storefurniture.pythonanywhere.com/api/product/?subcategory=5
                 }}>
                 <input

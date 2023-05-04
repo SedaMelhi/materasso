@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setCategoryId, setName } from './../../redux/catalogSlice/catalogSlice';
-
+import { setCategoryId, setName, setSubId } from './../../redux/catalogSlice/catalogSlice';
 import qs from 'qs';
 import Pagination from '../../components/Pagination';
-
 import CatalogTop from './CatalogTop/CatalogTop';
 import CatalogData from './CatalogData/CatalogData';
 
 const Catalog = ({ menu }) => {
   const id = useSelector((state) => state.catalog.categoryId);
-  const [update, setUpdate] = useState(false);
+  const subId = useSelector((state) => state.catalog.subId);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [category, setCategory] = useState(false);
-  const [subId, setSubId] = useState(false);
   const [catalog, setCatalog] = useState({ results: [] });
   const [load, setLoad] = useState(false);
-  const navigate = useNavigate();
 
   const getData = (url, id, type, subId) => {
     const params = `?page=${1}&category=${id}` + (type ? `&${type}=${subId}` : '');
@@ -27,7 +24,6 @@ const Catalog = ({ menu }) => {
         setCatalog(data);
         setLoad(true);
       });
-
     navigate(params);
   };
   useEffect(() => {
@@ -42,26 +38,22 @@ const Catalog = ({ menu }) => {
       getData('https://storefurniture.pythonanywhere.com/api/product/', params.category, false);
       setLoad(false);
       setCategory(false);
-      setSubId(false);
-      setUpdate(true);
+      dispatch(setSubId(false));
     }
   }, []);
-
   useEffect(() => {
-    const params = qs.parse(window.location.search.substring(1));
-    if (subId) {
+    setCategory(false);
+    dispatch(setSubId(false));
+    getData('https://storefurniture.pythonanywhere.com/api/product/', id, false);
+  }, [id]);
+  useEffect(() => {
+    if (subId !== false) {
       getData('https://storefurniture.pythonanywhere.com/api/product/', id, 'subcategory', subId);
-    } else if (update) {
-      getData('https://storefurniture.pythonanywhere.com/api/product/', id, false);
-    } else if (!params.categoryId) {
-      setUpdate(true);
     }
-    console.log(id);
-  }, [id, subId, update]);
-
+  }, [subId]);
   return (
     <div className="wrap">
-      <CatalogTop menu={menu} category={category} setCategory={setCategory} setSubId={setSubId} />
+      <CatalogTop menu={menu} category={category} setCategory={setCategory} />
       <CatalogData catalog={catalog} load={load} />
       {catalog.count > 9 && (
         <Pagination
