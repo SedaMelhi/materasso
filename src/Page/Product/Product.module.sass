@@ -1,23 +1,53 @@
+.slider
+   &__wrap
+    position: relative
+.imageCount
+    width: 81px
+    height: 44px
+    background: rgba(129, 143, 159, 0.5)
+    border-radius: 8px
+    color: white
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    z-index: 2
+    top: 24px
+    left: 24px
 .slide
     width: 100%
+    margin: 0 auto
     height: 480px
-    background: center/contain no-repeat
-
+    background: top/cover no-repeat
+    margin-bottom: 24px
+    
 .right
-    width: 795px
+    max-width: 795px
     position: relative
+    margin-right: 88px
 .product
     margin-top: 80px
-
-.title
-    margin-top: 80px
-
 .arrows
+    display: flex
+    justify-content: space-between
     width: 100%
-
+    margin: 0 auto
+    left: 0
+    right: 0
+    z-index: 3
+    top: 222px
+    position: absolute
+    > div
+        width: 36px
+        height: 36px  
+        opacity: .5
+        svg
+            width: 100%
 .wrapper
+    margin-top: 56px
     display: grid
     grid-template-columns: 1fr 1fr 1fr 1fr
+    width: 100%
 .bullet
     width: 180px
     height: 123px
@@ -29,6 +59,64 @@
     transition: .2s
     &:hover
         opacity: 1
-
 .active
     opacity: 1
+.wrapper
+    display: flex
+    justify-content: space-between
+    font-size: 1.25rem
+    line-height: 2rem
+.title
+    font-size: 1.5rem 
+    margin-top: 80px
+.description
+    margin: 16px 0 80px
+.details
+    display: flex
+    justify-content: space-between
+.detail
+    width: calc(50% - 44px)
+    &__title
+        font-size: 1.5rem 
+        font-weight: 500
+        margin-bottom: 16px
+    &__row
+        width: 100%
+        display: flex
+        justify-content: space-between
+        margin-bottom: 12px
+    &__subtitle
+        color: var(--textGrey) 
+.headline
+    font-size: 2rem
+    line-height: 2.6rem
+    font-weight: 500
+.priceText
+    color: var(--textGrey)
+    margin: 12px 0 32px
+.count
+    margin-bottom: 32px
+.btn
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    width: 353px
+    height: 56px
+    border: 1px solid var(--materasso)
+    border-radius: 8px
+    color: var(--materasso)
+    font-weight: 400
+    transition: .3s
+    &_blue
+        color: var(--white)
+        background-color: var(--materasso)
+        margin-bottom: 12px
+    &:hover
+        color: var(--white)
+        background-color: var(--materasso)
+        margin-bottom: 12px
+.icon
+    margin-right: 13px
+.sine
+    margin-left: 3px
