@@ -56,6 +56,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
     setTitle(false);
     setMenuItems(menu);
   };
+
   useEffect(() => {
     setMenuItems(menu);
   }, [menu]);
@@ -79,10 +80,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
     });
     setMenu(data);
   }, [data, catalog]);
-  useEffect(() => {
-    setMenuItems(menu);
-    setTitle(false);
-  }, [filters, menu]);
+  useEffect(() => {}, [filters, menu]);
   const changeId = (id, name) => {
     dispatch(setFilters({ categoryId: id, name: name, subId: false, page: 1 }));
   };

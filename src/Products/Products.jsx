@@ -1,7 +1,8 @@
 import style from './Products.module.sass';
 import bread from '../Page/Sale/Breadcrumbs/Breadcrumbs.module.sass';
 import { useDispatch } from 'react-redux';
-import { setFilters, setProduct } from './../redux/catalogSlice/catalogSlice';
+import { setFilters } from './../redux/catalogSlice/catalogSlice';
+import { setProductId } from './../redux/productSlice/productSlice';
 import { Link } from 'react-router-dom';
 
 const Products = ({ products, catalog }) => {
@@ -21,7 +22,7 @@ const Products = ({ products, catalog }) => {
                     );
                   }
                 : () => {
-                    //dispatch(setFilters{ categoryId: id, name: '', subId: false, page: 1 });
+                    dispatch(setProductId(id));
                   }
             }>
             <div className={style.product}>
