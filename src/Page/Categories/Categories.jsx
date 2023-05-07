@@ -48,12 +48,7 @@ const Categories = () => {
           </div>
         )}
       </div>
-      <Pagination
-        itemsPerPage={9}
-        count={categories.count}
-        getData={getData}
-        url="http://storefurniture.pythonanywhere.com/api/categories/"
-      />
+      <Pagination itemsPerPage={9} count={categories.count} getData={getData} />
     </div>
   );
 };

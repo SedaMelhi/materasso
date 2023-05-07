@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Slider from './Slider/Slider';
+import BasketSvg from '../../assets/svg/BasketSvg';
 import Path from '../../components/Path/Path';
 import style from './Product.module.sass';
 import 'swiper/css';
-import BasketSvg from '../../assets/svg/BasketSvg';
 
 const Product = () => {
   const id = useSelector((state) => state.product.id);
@@ -16,7 +16,7 @@ const Product = () => {
         setProduct(data.results[0]);
       });
   }, [id]);
-  console.log(product);
+
   return (
     <div className="wrap product">
       <div className={style.product}>

@@ -112,7 +112,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
             <div className={style.menu}>
               {menuItems.map((item, i) => (
                 <Link
-                  to={item.link}
+                  to={item.link ? item.link : '/catalog'}
                   className={style.menu__item}
                   onClick={
                     item.items

@@ -90,7 +90,6 @@ const Sale = ({ menu }) => {
           getData={getData}
           page={page - 1}
           sale={true}
-          url="https://storefurniture.pythonanywhere.com/api/product/"
         />
       )}
     </div>
