@@ -60,6 +60,14 @@ button
         &-pagination
             display: grid
             grid-template-columns: 1fr 1fr 1fr 1fr
+            @media (max-width: 560px)
+                width: 72px
+                margin: 0 auto
+                left: 0
+                right: 0
+                position: absolute
+                bottom: 20px
+                z-index: 2
 .arrows
     display: flex
     justify-content: space-between

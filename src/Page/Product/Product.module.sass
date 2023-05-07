@@ -14,6 +14,8 @@
     z-index: 2
     top: 24px
     left: 24px
+    @media (max-width: 560px)  
+        display: none
 .slide
     width: 100%
     margin: 0 auto
@@ -28,6 +30,9 @@
         height: 250px  
     @media (max-width: 768px)
         height: 414px  
+    @media (max-width: 560px)
+        height: 240px
+        
 .right
     width: 795px
     position: relative
@@ -79,7 +84,9 @@
         top: 115px
     @media (max-width: 768px)
         width: calc(100% - 48px)
-        top: 205px          
+        top: 205px     
+    @media (max-width: 560px)  
+        display: none 
 .wrapper
     margin-top: 56px
     display: grid
@@ -88,7 +95,7 @@
     @media (max-width: 768px)
         flex-direction: column
 .bullet
-    width: 180px
+    width: 92%
     height: 123px
     background: center/contain no-repeat
     opacity: 0.5
@@ -96,6 +103,8 @@
     border-radius: 8px
     cursor: pointer
     transition: .2s
+    &:hover
+        opacity: 1
     @media (max-width: 1300px)
         width: 160px
         height: 113px
@@ -108,12 +117,18 @@
         width: 100px
         height: 80px
     @media (max-width: 768px)
-        width: 142px
+        width: 92%
         height: 100px
-    &:hover
-        opacity: 1
+    @media (max-width: 560px)
+        background: rgba(129, 143, 159, 0.2)!important
+        border: none
+        width: 8px
+        height: 8px
+        margin: 0 4px
 .active
     opacity: 1
+    @media (max-width: 560px)
+        width: 24px
 .wrapper
     display: flex
     justify-content: space-between
@@ -122,13 +137,24 @@
 .title
     font-size: 1.5rem 
     margin-top: 80px
+    @media (max-width: 560px)
+        margin-top: 50px
 .description
     margin: 16px 0 80px
+    @media (max-width: 560px)
+        margin-bottom: 64px
 .details
     display: flex
     justify-content: space-between
+    @media (max-width: 560px)
+        flex-direction: column
 .detail
     width: calc(50% - 44px)
+    @media (max-width: 560px)
+        width: 100%
+    &:nth-child(2)
+        margin-top: 40px
+        
     &__title
         font-size: 1.5rem 
         font-weight: 500
@@ -165,6 +191,9 @@
         font-size: 1rem
         line-height: 1.2rem
         padding: 10px
+    @media (max-width: 560px)
+        font-size: 1.1rem
+        line-height: 1.5rem
     &_blue
         color: var(--white)
         background-color: var(--materasso)
