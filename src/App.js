@@ -1,6 +1,7 @@
 import './assets/sass/app.sass';
 
 import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import Header from './Header';
 import Home from './Page/Home/Home';
@@ -9,7 +10,7 @@ import Sale from './Page/Sale';
 import Categories from './Page/Categories/Categories';
 import Product from './Page/Product/Product';
 import Catalog from './Page/Catalog/Catalog';
-import { useEffect, useState } from 'react';
+import Basket from './Page/Basket';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -46,6 +47,7 @@ function App() {
           <Route path="categories" element={<Categories />} />
           <Route path="product" element={<Product />} />
           <Route path="catalog" element={<Catalog menu={menu} />} />
+          <Route path="basket" element={<Basket />} />
         </Routes>
       </div>
       <Footer />

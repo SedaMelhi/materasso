@@ -6,11 +6,13 @@ import Title from '../../components/Title/Title';
 import Pagination from '../../components/Pagination';
 import ContentLoader from 'react-content-loader';
 import style from './Categories.module.sass';
+import { useSelector } from 'react-redux';
 const Categories = () => {
   const [categories, setCategories] = useState({ results: [] });
   const [load, setLoad] = useState(false);
-  const getData = (url, id, page) => {
-    fetch(url + '?page=' + page)
+  const filters = useSelector((state) => state.catalog.filters);
+  const getData = (url) => {
+    fetch(url + '?page=' + filters.page)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
@@ -19,8 +21,8 @@ const Categories = () => {
   };
 
   useEffect(() => {
-    getData('http://storefurniture.pythonanywhere.com/api/categories/', 0, 1);
-  }, []);
+    getData('http://storefurniture.pythonanywhere.com/api/categories/');
+  }, [filters]);
   return (
     <div className={style.catalog + ' wrap'}>
       <Path />
