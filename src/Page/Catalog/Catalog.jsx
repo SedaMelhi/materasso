@@ -61,7 +61,7 @@ const Catalog = ({ menu }) => {
     <div className="wrap">
       <CatalogTop menu={menu} category={category} setCategory={setCategory} />
       <CatalogData catalog={catalog} load={load} />
-      {catalog.count > 9 && (
+      {catalog.count > 9 ? (
         <Pagination
           itemsPerPage={9}
           count={catalog.count}
@@ -69,6 +69,8 @@ const Catalog = ({ menu }) => {
           getData={getData}
           url="https://storefurniture.pythonanywhere.com/api/product/"
         />
+      ) : (
+        ''
       )}
     </div>
   );

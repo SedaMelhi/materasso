@@ -83,7 +83,7 @@ const Sale = ({ menu }) => {
         <span className={style.count__show}>33</span> /{' '}
         <span className={style.count__all}>108</span> товаров
       </div>
-      {data.count > 9 && (
+      {data.count > 9 ? (
         <Pagination
           itemsPerPage={9}
           count={data.count}
@@ -91,6 +91,8 @@ const Sale = ({ menu }) => {
           page={page - 1}
           sale={true}
         />
+      ) : (
+        ''
       )}
     </div>
   );

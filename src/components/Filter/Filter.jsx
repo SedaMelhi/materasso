@@ -47,7 +47,7 @@ const Filter = ({ category, setCategory, menu }) => {
           }>
           <ArrowSvg />
         </div>
-        {filterItems.length > 0 && (
+        {filterItems.length > 0 ? (
           <div className={style.select + ' ' + (selectShow ? style.select__show : '')}>
             {filterItems.map(({ name, id }) => (
               <label
@@ -79,6 +79,8 @@ const Filter = ({ category, setCategory, menu }) => {
               </label>
             ))}
           </div>
+        ) : (
+          ''
         )}
       </div>
     </div>

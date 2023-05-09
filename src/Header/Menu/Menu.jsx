@@ -24,37 +24,39 @@ const Menu = ({ menu }) => {
           <Link to="/sale" className={`${style.menu__item} ${style.menu__item_spec}`}>
             Sale
           </Link>
-          {menu.map(
-            ({ name, id, show_menu, products }) =>
-              show_menu && (
-                <div className={`${style.catalog} ${style.dropdown__small_wrap}`} key={id}>
-                  {products.length > 1 ? (
-                    <div className={style.menu__item}>
-                      {name} <DropMenu menu={products} name={name} />
-                    </div>
-                  ) : (
-                    products &&
-                    products.map((item) => (
-                      <Link
-                        key={id}
-                        to="/catalog"
-                        className={style.menu__item}
-                        onClick={() => {
-                          dispatch(
-                            setFilters({
-                              categoryId: item.id,
-                              name: item.name_category,
-                              subId: false,
-                              page: 1,
-                            }),
-                          );
-                        }}>
-                        {name}
-                      </Link>
-                    ))
-                  )}
-                </div>
-              ),
+          {menu.map(({ name, id, show_menu, products }) =>
+            show_menu ? (
+              <div className={`${style.catalog} ${style.dropdown__small_wrap}`} key={id}>
+                {products.length > 1 ? (
+                  <div className={style.menu__item}>
+                    {name} <DropMenu menu={products} name={name} />
+                  </div>
+                ) : products ? (
+                  products.map((item) => (
+                    <Link
+                      key={id}
+                      to="/catalog"
+                      className={style.menu__item}
+                      onClick={() => {
+                        dispatch(
+                          setFilters({
+                            categoryId: item.id,
+                            name: item.name_category,
+                            subId: false,
+                            page: 1,
+                          }),
+                        );
+                      }}>
+                      {name}
+                    </Link>
+                  ))
+                ) : (
+                  ''
+                )}
+              </div>
+            ) : (
+              ''
+            ),
           )}
         </div>
       </div>

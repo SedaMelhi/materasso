@@ -10,13 +10,12 @@ const DropMenu = ({ menu, catalog, name }) => {
     <div className={style.dropdown__wrap}>
       {catalog ? (
         <div className={style.dropdown}>
-          {menu.map(
-            ({ name, id, show_catalog, products }) =>
-              show_catalog && (
-                <div className={style.dropdown__item} key={id}>
-                  <div className={style.dropdown__title}>{name}</div>
-                  {products &&
-                    products.map((item) => (
+          {menu.map(({ name, id, show_catalog, products }) =>
+            show_catalog ? (
+              <div className={style.dropdown__item} key={id}>
+                <div className={style.dropdown__title}>{name}</div>
+                {products
+                  ? products.map((item) => (
                       <div
                         className={style.dropdown__menu}
                         key={item.id}
@@ -33,9 +32,12 @@ const DropMenu = ({ menu, catalog, name }) => {
                         }}>
                         <Link to="/catalog">{item.name_category}</Link>
                       </div>
-                    ))}
-                </div>
-              ),
+                    ))
+                  : ''}
+              </div>
+            ) : (
+              ''
+            ),
           )}
         </div>
       ) : (

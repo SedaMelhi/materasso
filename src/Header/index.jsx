@@ -34,9 +34,9 @@ const Header = ({ menu }) => {
             <Search />
           </div>
         </div>
-        {menu && <MenuMobile menuState={menuOpen} catalog={menu} setMenuOpen={setMenuOpen} />}
+        {menu ? <MenuMobile menuState={menuOpen} catalog={menu} setMenuOpen={setMenuOpen} /> : ''}
       </div>
-      {menu && <Menu menu={menu} />}
+      {menu ? <Menu menu={menu} /> : ''}
     </header>
   );
 };

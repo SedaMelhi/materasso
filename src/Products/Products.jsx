@@ -26,19 +26,23 @@ const Products = ({ products, catalog }) => {
                   }
             }>
             <div className={style.product}>
-              {images && (
+              {images ? (
                 <div
                   className={style.product__img}
                   style={{ background: 'url(' + images[0].image + ') center/100% no-repeat' }}>
                   {sale ? <div className={style.sale}>-{sale}</div> : ''}
                 </div>
+              ) : (
+                ''
               )}
-              {image && (
+              {image ? (
                 <div
                   className={style.product__img}
                   style={{ background: 'url(' + image + ') center/100% no-repeat' }}>
                   {sale ? <div className={style.sale}>-{sale}</div> : ''}
                 </div>
+              ) : (
+                ''
               )}
               {name_category ? <div className={style.title}>{name_category}</div> : ''}
               {subcategory

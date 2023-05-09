@@ -88,7 +88,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
     <div className={style.menu__wrap}>
       <div className={menuState ? style.open : ''}>
         <div className={style.menu__mobile}>
-          {title && (
+          {title ? (
             <div className={style.menu__title} onClick={onTitleClick}>
               <svg
                 width="8"
@@ -107,6 +107,8 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
               {title}
               <div></div>
             </div>
+          ) : (
+            ''
           )}
           <div className="wrap">
             <div className={style.menu}>
