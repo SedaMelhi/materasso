@@ -50,7 +50,6 @@ function App() {
           <Route path="basket" element={<Basket />} />
         </Routes>
       </div>
-      <Footer />
     </div>
   );
 }
