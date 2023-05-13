@@ -1,6 +1,7 @@
 .products
     display: grid
     align-items: stretch
+    position: relative
     grid-template-columns: 1fr 1fr 1fr
     gap: 24px
     @media (max-width: 1000px)
@@ -21,6 +22,7 @@
     &__img
         position: relative
         height: 280px
+        background: url(../assets/img/noimage.png) center/contain no-repeat 
         @media (max-width: 560px)
             height: 200px
        
@@ -53,3 +55,11 @@
     color: var(--btn2)
     text-align: center
     margin-top: 12px
+.basket
+    width: 25px
+    position: absolute
+    top: 0
+    &__right
+        right: 0
+    &__left
+        left: 0

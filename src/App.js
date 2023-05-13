@@ -15,10 +15,10 @@ import Basket from './Page/Basket';
 function App() {
   const [menu, setMenu] = useState([]);
   useEffect(() => {
-    fetch('http://storefurniture.pythonanywhere.com/api/menu/')
+    fetch('https://storefurniture.pythonanywhere.com/api/menu/')
       .then((res) => res.json())
       .then((menu) => {
-        fetch('http://storefurniture.pythonanywhere.com/api/alldata/')
+        fetch('https://storefurniture.pythonanywhere.com/api/alldata/')
           .then((res) => res.json())
           .then((categories) => {
             menu.map((item) => (item.products = []));

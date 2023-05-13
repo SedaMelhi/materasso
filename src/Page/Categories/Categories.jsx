@@ -21,7 +21,7 @@ const Categories = () => {
   };
 
   useEffect(() => {
-    getData('http://storefurniture.pythonanywhere.com/api/categories/');
+    getData('https://storefurniture.pythonanywhere.com/api/categories/');
   }, [filters]);
   return (
     <div className={style.catalog + ' wrap'}>
