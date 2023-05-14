@@ -3,20 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 export const basketSlice = createSlice({
   name: 'basket',
   initialState: {
-    count: 0,
-    products: [],
+    basket: [],
   },
   reducers: {
-    setCount(state, { payload }) {
-      state.count = payload;
-    },
-    setProducts(state, { payload }) {
-      state.count = payload;
+    setBasket(state, { payload }) {
+      state.basket = payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCount, setProducts } = basketSlice.actions;
+export const { setBasket } = basketSlice.actions;
 
 export default basketSlice.reducer;

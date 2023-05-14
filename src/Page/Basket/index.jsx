@@ -2,7 +2,12 @@ import Path from './../../components/Path/Path';
 import Line from './../../components/Line/Line';
 import style from './Basket.module.sass';
 import BasketItem from './BasketItem/BasketItem';
+import { useSelector } from 'react-redux';
+import { setBasket } from './../../redux/basketSlice/basketSlice';
+import { useDispatch } from 'react-redux';
 const Basket = () => {
+  const products = useSelector((state) => state.basket.product);
+  const dispatch = useDispatch();
   return (
     <div className={style.basket}>
       <div className="wrap">
