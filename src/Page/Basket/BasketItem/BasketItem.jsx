@@ -2,9 +2,9 @@ import CloseSvg from '../../../assets/svg/CloseSvg';
 import MinusSvg from '../../../assets/svg/MinusSvg';
 import PlusSvg from '../../../assets/svg/PlusSvg';
 import style from './../Basket.module.sass';
-import { useState } from 'react';
-const BasketItem = () => {
-  const [value, setValue] = useState(0);
+import { useEffect, useState } from 'react';
+const BasketItem = ({ name, id, count, image, price, sale, installment, setCountValue }) => {
+  const [value, setValue] = useState(count);
 
   const decrement = () => {
     if (value > 0) {
@@ -15,18 +15,19 @@ const BasketItem = () => {
   const increment = () => {
     setValue(value + 1);
   };
+  useEffect(() => {
+    setCountValue(value);
+  }, []);
   return (
     <div className={style.product}>
       <div className={style.product__left}>
         <div className={style.image}>
-          <img src="./img/products/product3.png" alt="" />
+          <img src={image} alt="" />
         </div>
         <div className={style.text}>
-          <div className={style.name}>Кресло Naomi букле</div>
+          <div className={style.name}>{name}</div>
           <div className={style.size}>
-            Размер: <span className={style.width}>94.1</span>x{' '}
-            <span className={style.lenght}>100.5</span> x{' '}
-            <span className={style.height}>108.3</span> см
+            {installment ? 'товар с рассрочкой' : 'товар без рассрочки'}
           </div>
         </div>
       </div>
@@ -49,11 +50,12 @@ const BasketItem = () => {
             </button>
           </div>
           <div className={style.price}>
-            <span className={style.text}>73 500</span> ₽/ШТ.
+            <span className={style.text + ' ' + (sale > 0 ? style.lineThrough : '')}>{price}</span>{' '}
+            ₽/ШТ. {sale > 0 ? `(-${sale}%)` : ''}
           </div>
         </div>
         <div className={style.price__all}>
-          <span className={style.text__all}>73 500</span> ₽
+          <span className={style.text__all}>{((+price * (100 - sale)) / 100) * value}</span> ₽
         </div>
         <div className={style.close}>
           <CloseSvg />

@@ -5,15 +5,59 @@ import BasketItem from './BasketItem/BasketItem';
 import { useSelector } from 'react-redux';
 import { setBasket } from './../../redux/basketSlice/basketSlice';
 import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 const Basket = () => {
-  const products = useSelector((state) => state.basket.product);
+  const basket = useSelector((state) => state.basket.basket);
+  const [products, setProducts] = useState([]);
+  const [countValue, setCountValue] = useState(0);
   const dispatch = useDispatch();
+  useEffect(() => {
+    let allPrice = 0;
+    const fetchData = async () => {
+      const data = [];
+      for (const item of basket) {
+        const response = await fetch(
+          `https://storefurniture.pythonanywhere.com/api/product/?id=${item.id}`,
+        );
+        const result = await response.json();
+        const product = {
+          ...result.results[0],
+          countProducts: item.count,
+          installment: item.installment,
+        };
+        data.push(product);
+      }
+      setProducts(data);
+    };
+
+    fetchData();
+  }, [basket]);
+  useEffect(() => {
+    products.forEach((item) => console.log(item));
+  }, [products]);
+  function getGoodsText(quantity) {
+    let text = 'товар';
+
+    if (quantity % 10 === 1 && quantity % 100 !== 11) {
+      text += '';
+    } else if (
+      quantity % 10 >= 2 &&
+      quantity % 10 <= 4 &&
+      !(quantity % 100 >= 12 && quantity % 100 <= 14)
+    ) {
+      text += 'а';
+    } else {
+      text += 'ов';
+    }
+
+    return `${quantity} ${text}`;
+  }
   return (
     <div className={style.basket}>
       <div className="wrap">
         <Path />
         <h2 className={style.title}>Корзина</h2>
-        <div className={style.subtitle}>2 товара</div>
+        <div className={style.subtitle}>{getGoodsText(products.length)}</div>
         <Line />
         <div className={style.content}>
           <div className={style.left}>
@@ -22,8 +66,24 @@ const Basket = () => {
             </div>
             <div className={style.products}>
               <Line />
-              <BasketItem />
-              <Line />
+              {products.length > 0
+                ? products.map(({ name, id, countProducts, images, price, sale, installment }) => (
+                    <>
+                      <BasketItem
+                        key={id}
+                        name={name}
+                        id={id}
+                        count={countProducts}
+                        image={images[0].image}
+                        price={price}
+                        sale={sale}
+                        installment={installment}
+                        setCountValue={setCountValue}
+                      />
+                      <Line />
+                    </>
+                  ))
+                : ''}
             </div>
           </div>
           <div className={style.right}>
@@ -34,7 +94,7 @@ const Basket = () => {
             <Line />
             <div className={style.line + ' ' + style.line__bottom}>
               Общая стоимость
-              <div className={style.subtitle}>291 300 ₽</div>
+              <div className={style.subtitle}>{} ₽</div>
             </div>
             <div className={style.btn}>Перейти к оформление</div>
           </div>

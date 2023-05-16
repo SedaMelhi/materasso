@@ -23,7 +23,6 @@ const Product = () => {
       });
   }, [id]);
   const addProduct = (installment) => {
-    console.log(basket);
     for (let item of basket) {
       if (item.id === id) {
         dispatch(
