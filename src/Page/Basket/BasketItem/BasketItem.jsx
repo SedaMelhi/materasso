@@ -13,7 +13,7 @@ const BasketItem = ({ name, id, count, image, price, sale, installment }) => {
   const basket = useSelector((state) => state.basket.basket);
   const dispatch = useDispatch();
   const decrement = () => {
-    if (value > 0) {
+    if (value > 1) {
       setValue(value - 1);
       const arr = basket.map((item) =>
         item.id === id
@@ -46,6 +46,10 @@ const BasketItem = ({ name, id, count, image, price, sale, installment }) => {
     );
     dispatch(setBasket(arr));
     console.log(arr);
+  };
+
+  const deleteElemnet = (productId) => {
+    dispatch(setBasket(basket.filter(({ id }) => id !== productId)));
   };
 
   return (
@@ -87,7 +91,7 @@ const BasketItem = ({ name, id, count, image, price, sale, installment }) => {
         <div className={style.price__all}>
           <span className={style.text__all}>{((+price * (100 - sale)) / 100) * value}</span> ₽
         </div>
-        <div className={style.close}>
+        <div className={style.close} onClick={() => deleteElemnet(id)}>
           <CloseSvg />
         </div>
       </div>
