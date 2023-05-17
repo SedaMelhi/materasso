@@ -1,23 +1,53 @@
 import CloseSvg from '../../../assets/svg/CloseSvg';
 import MinusSvg from '../../../assets/svg/MinusSvg';
 import PlusSvg from '../../../assets/svg/PlusSvg';
-import style from './../Basket.module.sass';
 import { useEffect, useState } from 'react';
-const BasketItem = ({ name, id, count, image, price, sale, installment, setCountValue }) => {
-  const [value, setValue] = useState(count);
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setBasket } from '../../../redux/basketSlice/basketSlice';
 
+import style from './../Basket.module.sass';
+
+const BasketItem = ({ name, id, count, image, price, sale, installment }) => {
+  const [value, setValue] = useState(count);
+  const basket = useSelector((state) => state.basket.basket);
+  const dispatch = useDispatch();
   const decrement = () => {
     if (value > 0) {
       setValue(value - 1);
+      const arr = basket.map((item) =>
+        item.id === id
+          ? {
+              id: item.id,
+              count: item.count - 1,
+              installment: item.installment,
+              sale: item.sale,
+              price: item.price,
+            }
+          : item,
+      );
+      dispatch(setBasket(arr));
+      console.log(arr);
     }
   };
 
   const increment = () => {
     setValue(value + 1);
+    const arr = basket.map((item) =>
+      item.id === id
+        ? {
+            id: item.id,
+            count: item.count + 1,
+            installment: item.installment,
+            sale: item.sale,
+            price: item.price,
+          }
+        : item,
+    );
+    dispatch(setBasket(arr));
+    console.log(arr);
   };
-  useEffect(() => {
-    setCountValue(value);
-  }, []);
+
   return (
     <div className={style.product}>
       <div className={style.product__left}>
@@ -40,7 +70,7 @@ const BasketItem = ({ name, id, count, image, price, sale, installment, setCount
             <input
               type="number"
               className={style.count}
-              min="0"
+              min="1"
               max="100"
               value={value}
               onChange={(e) => setValue(e.target.value)}

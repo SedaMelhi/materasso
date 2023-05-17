@@ -28,14 +28,27 @@ const Product = () => {
         dispatch(
           setBasket(
             basket.map((item) =>
-              item.id === id ? { id: id, count: item.count + 1, installment: installment } : item,
+              item.id === id
+                ? {
+                    id: id,
+                    count: item.count + 1,
+                    installment: installment,
+                    sale: product.sale,
+                    price: product.price,
+                  }
+                : item,
             ),
           ),
         );
         return true;
       }
     }
-    dispatch(setBasket([...basket, { id: id, count: 1, installment: installment }]));
+    dispatch(
+      setBasket([
+        ...basket,
+        { id: id, count: 1, installment: installment, sale: product.sale, price: product.price },
+      ]),
+    );
   };
 
   return (

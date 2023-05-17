@@ -3,16 +3,14 @@ import Line from './../../components/Line/Line';
 import style from './Basket.module.sass';
 import BasketItem from './BasketItem/BasketItem';
 import { useSelector } from 'react-redux';
-import { setBasket } from './../../redux/basketSlice/basketSlice';
-import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+
 const Basket = () => {
   const basket = useSelector((state) => state.basket.basket);
   const [products, setProducts] = useState([]);
-  const [countValue, setCountValue] = useState(0);
-  const dispatch = useDispatch();
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
-    let allPrice = 0;
+    let sum = 0;
     const fetchData = async () => {
       const data = [];
       for (const item of basket) {
@@ -29,15 +27,17 @@ const Basket = () => {
       }
       setProducts(data);
     };
-
     fetchData();
+    basket.forEach(({ price, count, sale }) => {
+      sum += (count * (+price * (100 - sale))) / 100;
+    });
+    setTotalPrice(sum);
   }, [basket]);
-  useEffect(() => {
-    products.forEach((item) => console.log(item));
-  }, [products]);
-  function getGoodsText(quantity) {
+  // useEffect(() => {
+  //   products.forEach((item) => console.log(item));
+  // }, [products]);
+  const getGoodsText = (quantity) => {
     let text = 'товар';
-
     if (quantity % 10 === 1 && quantity % 100 !== 11) {
       text += '';
     } else if (
@@ -49,9 +49,9 @@ const Basket = () => {
     } else {
       text += 'ов';
     }
-
     return `${quantity} ${text}`;
-  }
+  };
+
   return (
     <div className={style.basket}>
       <div className="wrap">
@@ -68,9 +68,8 @@ const Basket = () => {
               <Line />
               {products.length > 0
                 ? products.map(({ name, id, countProducts, images, price, sale, installment }) => (
-                    <>
+                    <div key={id}>
                       <BasketItem
-                        key={id}
                         name={name}
                         id={id}
                         count={countProducts}
@@ -78,10 +77,9 @@ const Basket = () => {
                         price={price}
                         sale={sale}
                         installment={installment}
-                        setCountValue={setCountValue}
                       />
                       <Line />
-                    </>
+                    </div>
                   ))
                 : ''}
             </div>
@@ -94,7 +92,7 @@ const Basket = () => {
             <Line />
             <div className={style.line + ' ' + style.line__bottom}>
               Общая стоимость
-              <div className={style.subtitle}>{} ₽</div>
+              <div className={style.subtitle}>{totalPrice} ₽</div>
             </div>
             <div className={style.btn}>Перейти к оформление</div>
           </div>
