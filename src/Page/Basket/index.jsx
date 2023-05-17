@@ -2,13 +2,14 @@ import Path from './../../components/Path/Path';
 import Line from './../../components/Line/Line';
 import style from './Basket.module.sass';
 import BasketItem from './BasketItem/BasketItem';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-
+import { setBasket } from '../../redux/basketSlice/basketSlice';
 const Basket = () => {
-  const basket = useSelector((state) => state.basket.basket);
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const basket = useSelector((state) => state.basket.basket);
+  const dispatch = useDispatch();
   useEffect(() => {
     let sum = 0;
     const fetchData = async () => {
@@ -62,7 +63,9 @@ const Basket = () => {
         <div className={style.content}>
           <div className={style.left}>
             <div className={style.del__wrap}>
-              <button className={style.del}>Удалить всё</button>
+              <button className={style.del} onClick={() => dispatch(setBasket([]))}>
+                Удалить всё
+              </button>
             </div>
             <div className={style.products}>
               <Line />

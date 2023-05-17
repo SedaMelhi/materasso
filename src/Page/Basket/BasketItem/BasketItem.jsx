@@ -2,8 +2,7 @@ import CloseSvg from '../../../assets/svg/CloseSvg';
 import MinusSvg from '../../../assets/svg/MinusSvg';
 import PlusSvg from '../../../assets/svg/PlusSvg';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setBasket } from '../../../redux/basketSlice/basketSlice';
 
 import style from './../Basket.module.sass';
