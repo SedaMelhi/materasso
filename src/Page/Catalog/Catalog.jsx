@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setFilters } from './../../redux/catalogSlice/catalogSlice';
+import Path from './../../components/Path/Path';
 import qs from 'qs';
 import Pagination from '../../components/Pagination';
 import CatalogTop from './CatalogTop/CatalogTop';
 import CatalogData from './CatalogData/CatalogData';
-
+import style from './Catalog.module.sass';
 const Catalog = ({ menu }) => {
   const filters = useSelector((state) => state.catalog.filters);
   const dispatch = useDispatch();
@@ -59,6 +60,15 @@ const Catalog = ({ menu }) => {
   }, [filters]);
   return (
     <div className="wrap">
+      <div className={style.path}>
+        <Path
+          path={[
+            { text: 'Главная', link: '/' },
+            { text: 'Каталог', link: '/catalog' },
+            { text: filters.name, link: `?page=1&category=${filters.categoryId}` },
+          ]}
+        />
+      </div>
       <CatalogTop menu={menu} category={category} setCategory={setCategory} />
       <CatalogData catalog={catalog} load={load} />
       {catalog.count > 9 ? (

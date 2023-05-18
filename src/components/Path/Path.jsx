@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from './Path.module.sass';
-const Path = () => {
-  const path = [
-    { text: 'Главная', link: '/' },
-    { text: 'SALE', link: '/sale' },
-  ];
+const Path = ({ path }) => {
   return (
     <div className={style.path}>
       {path.map(({ text, link }, i) => (

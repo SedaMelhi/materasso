@@ -25,7 +25,12 @@ const Categories = () => {
   }, [filters]);
   return (
     <div className={style.catalog + ' wrap'}>
-      <Path />
+      <Path
+        path={[
+          { text: 'Главная', link: '/' },
+          { text: 'Каталог', link: '/categories' },
+        ]}
+      />
       <Title title="Каталог" />
       <p className={style.description}>Более 60 категорий товаров и сотни материалов</p>
       <Line />

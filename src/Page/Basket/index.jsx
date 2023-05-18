@@ -56,7 +56,12 @@ const Basket = () => {
   return (
     <div className={style.basket}>
       <div className="wrap">
-        <Path />
+        <Path
+          path={[
+            { text: 'Главная', link: '/' },
+            { text: 'Корзина', link: '/basket' },
+          ]}
+        />
         <h2 className={style.title}>Корзина</h2>
         <div className={style.subtitle}>{getGoodsText(products.length)}</div>
         <Line />

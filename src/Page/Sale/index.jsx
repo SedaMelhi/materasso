@@ -50,7 +50,12 @@ const Sale = ({ menu }) => {
   }, []);
   return (
     <div className={style.sale + ' wrap'}>
-      <Path />
+      <Path
+        path={[
+          { text: 'Главная', link: '/' },
+          { text: 'Sale', link: '/sale' },
+        ]}
+      />
       <Title title="Распродажа" />
       {/* <Breadcrumbs category={category} setCategory={setCategory} /> */}
       <Line />

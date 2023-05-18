@@ -10,6 +10,7 @@ import 'swiper/css';
 
 const Product = () => {
   const id = useSelector((state) => state.product.id);
+  const filters = useSelector((state) => state.catalog.filters);
   const [product, setProduct] = useState({ images: [] });
   const [btnClick, setBtnClick] = useState(false);
   const [installment, setInstallment] = useState(false);
@@ -54,7 +55,13 @@ const Product = () => {
   return (
     <div className="wrap product">
       <div className={style.product}>
-        <Path />
+        <Path
+          path={[
+            { text: 'Главная', link: '/' },
+            { text: filters.name, link: `/catalog/?page=1&category=${filters.categoryId}` },
+            { text: product.name, link: '' },
+          ]}
+        />
         <div className={style.wrapper}>
           <div className={style.right}>
             <Slider product={product} />
