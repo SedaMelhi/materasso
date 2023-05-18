@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setBasket } from './../../redux/basketSlice/basketSlice';
 import { useDispatch } from 'react-redux';
+import { setProductId } from '../../redux/productSlice/productSlice';
 import Slider from './Slider/Slider';
+import qs from 'qs';
 import BasketSvg from '../../assets/svg/BasketSvg';
 import Path from '../../components/Path/Path';
 import style from './Product.module.sass';
@@ -15,13 +18,30 @@ const Product = () => {
   const [btnClick, setBtnClick] = useState(false);
   const [installment, setInstallment] = useState(false);
   const basket = useSelector((state) => state.basket.basket);
+  const [load, setLoad] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    fetch(`https://storefurniture.pythonanywhere.com/api/product/?id=${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data.results[0]);
-      });
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      dispatch(setProductId(params.id));
+      fetch(`https://storefurniture.pythonanywhere.com/api/product/?id=${params.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data.results[0]);
+        });
+    } else {
+      getData();
+    }
+  }, []);
+  useEffect(() => {
+    if (!window.location.search) {
+      fetch(`https://storefurniture.pythonanywhere.com/api/product/?id=${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data.results[0]);
+        });
+    }
   }, [id]);
   const addProduct = (installment) => {
     for (let item of basket) {
@@ -51,16 +71,33 @@ const Product = () => {
       ]),
     );
   };
-
+  const getData = () => {
+    const params = `?id=${id}`;
+    fetch('https://storefurniture.pythonanywhere.com/api/product/' + params)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data.results[0]);
+        setLoad(true);
+      });
+    navigate(params);
+  };
   return (
     <div className="wrap product">
       <div className={style.product}>
         <Path
-          path={[
-            { text: 'Главная', link: '/' },
-            { text: filters.name, link: `/catalog/?page=1&category=${filters.categoryId}` },
-            { text: product.name, link: '' },
-          ]}
+          path={
+            filters.name
+              ? [
+                  { text: 'Главная', link: '/' },
+                  { text: filters.name, link: `/catalog/?page=1&category=${filters.categoryId}` },
+                  { text: product.name, link: '' },
+                ]
+              : [
+                  { text: 'Главная', link: '/' },
+
+                  { text: product.name, link: '' },
+                ]
+          }
         />
         <div className={style.wrapper}>
           <div className={style.right}>
