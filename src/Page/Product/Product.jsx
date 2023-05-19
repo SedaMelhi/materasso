@@ -58,6 +58,7 @@ const Product = () => {
                     installment: installment,
                     sale: product.sale,
                     price: product.price,
+                    name: product.name,
                   }
                 : item,
             ),
@@ -69,7 +70,14 @@ const Product = () => {
     dispatch(
       setBasket([
         ...basket,
-        { id: id, count: 1, installment: installment, sale: product.sale, price: product.price },
+        {
+          id: id,
+          count: 1,
+          installment: installment,
+          sale: product.sale,
+          price: product.price,
+          name: product.name,
+        },
       ]),
     );
   };

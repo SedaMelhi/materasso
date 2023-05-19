@@ -22,7 +22,9 @@ const Header = ({ menu }) => {
         <div className={style.nav__wrap}>
           <Hamburger setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
           <div className={style.phone}>
-            <a href="tel:+79298981565">+ 7 (929) 898 - 15 - 65</a>
+            <div>
+              <a href="tel:+79639811288">+ 7 (963) 981 - 12 - 88</a>
+            </div>
           </div>
           <div className={style.logo}>
             <Link to="/">

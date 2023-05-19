@@ -22,11 +22,11 @@ const BasketItem = ({ name, id, count, image, price, sale, installment }) => {
               installment: item.installment,
               sale: item.sale,
               price: item.price,
+              name: item.name,
             }
           : item,
       );
       dispatch(setBasket(arr));
-      console.log(arr);
     }
   };
 
@@ -40,11 +40,11 @@ const BasketItem = ({ name, id, count, image, price, sale, installment }) => {
             installment: item.installment,
             sale: item.sale,
             price: item.price,
+            name: item.name,
           }
         : item,
     );
     dispatch(setBasket(arr));
-    console.log(arr);
   };
 
   const deleteElemnet = (productId) => {

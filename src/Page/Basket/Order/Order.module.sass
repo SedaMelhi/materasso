@@ -1,0 +1,80 @@
+.order
+    color: var(--text)
+.title
+    font-size: 3rem
+    line-height: 4.5rem
+    text-align: center
+    font-weight: 400
+    margin: 32px 0
+.subtitle
+    font-size: 3rem
+    line-height: 4.5rem
+    font-weight: 400
+    margin: 32px 0 24px
+.content
+    display: flex
+    justify-content: space-between
+    &__left
+        width: 560px
+
+.window
+    margin-top: 32px
+    padding: 24px 32px
+    width: 531px
+    border: 1px solid #CED3D6
+    border-radius: 24px
+    &__title
+        font-size: 2rem
+        line-height: 3rem 
+        font-weight: 500
+        margin-bottom: 24px
+    &__text
+        font-size: 1.25rem
+        line-height: 2rem
+        color: var(--textGrey)
+
+.input
+    margin-top: 24px
+    padding: 12px 24px
+    width: 100%
+    font-size: 1.25rem
+    height: 56px
+    background: var(--strouk)
+    border: 1px solid #CED3D6
+    border-radius: 8px
+    &:focus
+        border-color: var(--materasso)
+
+.networks
+    display: flex
+    justify-content: space-between
+    margin-top: 24px
+    &__item
+        display: flex
+        align-items: center
+        justify-content: center
+        padding: 12px 24px
+        width: 145px
+        border: 1px solid var(--stroke)
+        border-radius: 8px
+.radio
+    display: none
+    &:checked
+        & + .networks__item
+            border-color: var(--materasso)
+.btn
+    width: 100%
+    padding: 12px 24px
+    border-radius: 8px
+    border: none
+    background: var(--materasso)
+    color: #fff
+    font-size: 1.25rem
+    line-height: 2rem
+    margin-top: 32px
+.error
+    font-size: 1.1rem
+    color: #d40303
+    position: relative
+    top: 12px
+    left: 5px

@@ -5,6 +5,7 @@ import BasketItem from './BasketItem/BasketItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { setBasket } from '../../redux/basketSlice/basketSlice';
+import { Link } from 'react-router-dom';
 const Basket = () => {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -33,7 +34,6 @@ const Basket = () => {
       sum += (count * (+price * (100 - sale))) / 100;
     });
     setTotalPrice(sum);
-    console.log(basket);
   }, [basket]);
   const getGoodsText = (quantity) => {
     let text = 'товар';
@@ -67,11 +67,9 @@ const Basket = () => {
           <div className={style.left}>
             <div className={style.del__wrap}>
               {products.length > 0 && (
-                <>
-                  <button className={style.del} onClick={() => dispatch(setBasket([]))}>
-                    Удалить всё
-                  </button>
-                </>
+                <button className={style.del} onClick={() => dispatch(setBasket([]))}>
+                  Удалить всё
+                </button>
               )}
             </div>
             <div className={style.products}>
@@ -104,7 +102,9 @@ const Basket = () => {
               Общая стоимость
               <div className={style.subtitle}>{totalPrice} ₽</div>
             </div>
-            <div className={style.btn}>Перейти к оформление</div>
+            <Link to="../basket/order">
+              <div className={style.btn}>Перейти к оформление</div>
+            </Link>
           </div>
         </div>
       </div>
