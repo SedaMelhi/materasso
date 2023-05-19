@@ -174,7 +174,7 @@ const Product = () => {
         </div>
       ) : (
         <div className="load">
-          <div class="lds-spinner">
+          <div className="lds-spinner">
             <div></div>
             <div></div>
             <div></div>

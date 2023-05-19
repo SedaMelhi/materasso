@@ -33,10 +33,8 @@ const Basket = () => {
       sum += (count * (+price * (100 - sale))) / 100;
     });
     setTotalPrice(sum);
+    console.log(basket);
   }, [basket]);
-  // useEffect(() => {
-  //   products.forEach((item) => console.log(item));
-  // }, [products]);
   const getGoodsText = (quantity) => {
     let text = 'товар';
     if (quantity % 10 === 1 && quantity % 100 !== 11) {
@@ -68,12 +66,16 @@ const Basket = () => {
         <div className={style.content}>
           <div className={style.left}>
             <div className={style.del__wrap}>
-              <button className={style.del} onClick={() => dispatch(setBasket([]))}>
-                Удалить всё
-              </button>
+              {products.length > 0 && (
+                <>
+                  <button className={style.del} onClick={() => dispatch(setBasket([]))}>
+                    Удалить всё
+                  </button>
+                </>
+              )}
             </div>
             <div className={style.products}>
-              <Line />
+              {products.length > 0 && <Line />}
               {products.length > 0
                 ? products.map(({ name, id, countProducts, images, price, sale, installment }) => (
                     <div key={id}>
