@@ -15,7 +15,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
       },
       {
         name: 'Коллекции',
-        link: '/',
+        link: '/collection',
         items: [
           { name: 'Ницца', link: '/' },
           { name: 'Бруклин', link: '/' },

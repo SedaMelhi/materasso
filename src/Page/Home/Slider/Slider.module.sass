@@ -9,7 +9,7 @@
 .slider
     display: flex
     align-items: center
-    justify-content: space-between
+    justify-content: center
     height: 680px
     margin-top: 32px
     border-radius: 15px
@@ -76,8 +76,6 @@
         font-size: .8rem
         text-transform: uppercase
         padding: 0
-    
-
 .arrow
     display: flex
     align-items: center
@@ -96,4 +94,16 @@
         height: 29px
         svg
             width: 5px
-    
+.arrows
+    display: flex
+    justify-content: space-between
+    width: calc(100% - 48px)  
+    position: absolute
+    z-index: 1
+    top: calc(50% - 29px)
+    left: 0
+    right: 0
+    margin: 0 auto
+    @media (max-width: 560px)
+        top: calc(50% - 14.5px)
+        width: calc(100% - 26px)  

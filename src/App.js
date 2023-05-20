@@ -12,6 +12,7 @@ import Product from './Page/Product/Product';
 import Catalog from './Page/Catalog/Catalog';
 import Basket from './Page/Basket';
 import Order from './Page/Basket/Order/Order';
+import Collection from './Page/Collection/Collection';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -50,6 +51,7 @@ function App() {
           <Route path="catalog" element={<Catalog menu={menu} />} />
           <Route path="basket" element={<Basket />} />
           <Route path="basket/order" element={<Order />} />
+          <Route path="collection" element={<Collection />} />
         </Routes>
       </div>
       <Footer />

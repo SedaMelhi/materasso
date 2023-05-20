@@ -52,7 +52,6 @@ const Order = () => {
         console.log('Произошла ошибка при отправке данных:', error);
       });
     setErr(false);
-    console.log(newData);
   };
   return (
     <div className={style.order + ' wrap'}>
@@ -74,70 +73,70 @@ const Order = () => {
           </div>
         </div>
         <form className={style.window}>
-            <h3 className={style.window__title}>ЛИЧНЫЕ ДАННЫЕ</h3>
-            <div className={style.window__text}>
-              Введите свои данные и выберите удобный способ связи
-            </div>
-            <input
-              type="text"
-              className={style.input}
-              placeholder="ФИО"
-              name="name"
-              value={data.name}
-              onChange={changeData}
-            />
-            <InputMask
-              className={style.input}
-              mask="+7 (999) 999-99-99"
-              placeholder="+7 (___) ___-__-__"
-              name="phone"
-              onChange={changeData}
-              value={data.phone}
-            />
+          <h3 className={style.window__title}>ЛИЧНЫЕ ДАННЫЕ</h3>
+          <div className={style.window__text}>
+            Введите свои данные и выберите удобный способ связи
+          </div>
+          <input
+            type="text"
+            className={style.input}
+            placeholder="ФИО"
+            name="name"
+            value={data.name}
+            onChange={changeData}
+          />
+          <InputMask
+            className={style.input}
+            mask="+7 (999) 999-99-99"
+            placeholder="+7 (___) ___-__-__"
+            name="phone"
+            onChange={changeData}
+            value={data.phone}
+          />
 
-            <div className={style.networks}>
-              <input
-                className={style.radio}
-                type="radio"
-                id="WhatsApp"
-                name="networks"
-                value="WhatsApp"
-                onChange={changeData}
-                checked={data.networks === 'WhatsApp'}
-              />
-              <label className={style.networks__item} htmlFor="WhatsApp">
-                <WhatsApp />
-              </label>
-              <input
-                className={style.radio}
-                type="radio"
-                id="telegram"
-                name="networks"
-                value="telegram"
-                onChange={changeData}
-                checked={data.networks === 'telegram'}
-              />
-              <label className={style.networks__item} htmlFor="telegram">
-                <Telegram />
-              </label>
-              <input
-                className={style.radio}
-                type="radio"
-                id="call"
-                name="networks"
-                value="call"
-                onChange={changeData}
-                checked={data.networks === 'call'}
-              />
-              <label className={style.networks__item} htmlFor="call">
-                <CallSvg />
-              </label>
-            </div>
-            {err ? <p className={style.error}>Заполните все поля!</p> : ''}
-            <button className={style.btn} onClick={sendData}>
-              Оставьте заявку
-            </button>
-          </form>
+          <div className={style.networks}>
+            <input
+              className={style.radio}
+              type="radio"
+              id="WhatsApp"
+              name="networks"
+              value="WhatsApp"
+              onChange={changeData}
+              checked={data.networks === 'WhatsApp'}
+            />
+            <label className={style.networks__item} htmlFor="WhatsApp">
+              <WhatsApp />
+            </label>
+            <input
+              className={style.radio}
+              type="radio"
+              id="telegram"
+              name="networks"
+              value="telegram"
+              onChange={changeData}
+              checked={data.networks === 'telegram'}
+            />
+            <label className={style.networks__item} htmlFor="telegram">
+              <Telegram />
+            </label>
+            <input
+              className={style.radio}
+              type="radio"
+              id="call"
+              name="networks"
+              value="call"
+              onChange={changeData}
+              checked={data.networks === 'call'}
+            />
+            <label className={style.networks__item} htmlFor="call">
+              <CallSvg />
+            </label>
+          </div>
+          {err ? <p className={style.error}>Заполните все поля!</p> : ''}
+          <button className={style.btn} onClick={sendData}>
+            Оставьте заявку
+          </button>
+        </form>
       </div>
     </div>
   );

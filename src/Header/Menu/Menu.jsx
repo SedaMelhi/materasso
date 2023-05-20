@@ -18,7 +18,7 @@ const Menu = ({ menu }) => {
             <DropMenu menu={menu} catalog={true} />
           </div>
 
-          <Link to="/" className={style.menu__item}>
+          <Link to="/collection" className={style.menu__item}>
             Коллекции
           </Link>
           <Link to="/sale" className={`${style.menu__item} ${style.menu__item_spec}`}>

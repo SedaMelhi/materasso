@@ -102,7 +102,7 @@ const Basket = () => {
               Общая стоимость
               <div className={style.subtitle}>{totalPrice} ₽</div>
             </div>
-            <Link to="../basket/order">
+            <Link to={basket.length > 0 ? '../basket/order' : ''}>
               <div className={style.btn}>Перейти к оформление</div>
             </Link>
           </div>

@@ -19,7 +19,7 @@ const Footer = () => {
               <Link to="/categories" className={style.link}>
                 Каталог
               </Link>
-              <Link to="/" className={style.link}>
+              <Link to="/collection" className={style.link}>
                 Коллекции
               </Link>
               <Link to="/" className={style.link}>
