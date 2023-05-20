@@ -6,28 +6,52 @@
     text-align: center
     font-weight: 400
     margin: 32px 0
+    @media (max-width: 768px)
+        font-size: 2.3rem
+        line-height: 3rem
 .subtitle
     font-size: 3rem
     line-height: 4.5rem
     font-weight: 400
     margin: 32px 0 24px
+    @media (max-width: 768px)
+        font-size: 2.3rem
+        line-height: 3rem
 .content
     display: flex
     justify-content: space-between
+    @media (max-width: 768px)
+        flex-direction: column
     &__left
         width: 560px
+        @media (max-width: 768px)
+            width: 100%
 
 .window
-    margin-top: 32px
+    margin: 32px 0 0 32px
     padding: 24px 32px
     width: 531px
     border: 1px solid #CED3D6
     border-radius: 24px
+    @media (max-width: 1250px)
+        width: 50%
+    @media (max-width: 768px)
+        width: 100%
+        margin: 32px 0
+        border-radius: 20px
+    @media (max-width: 560px)
+        border-radius: 15px
     &__title
         font-size: 2rem
         line-height: 3rem 
         font-weight: 500
         margin-bottom: 24px
+        @media (max-width: 768px)
+            font-size: 1.7rem
+            line-height: 2.3rem
+        @media (max-width: 560px)
+            font-size: 1.5rem
+            line-height: 2rem
     &__text
         font-size: 1.25rem
         line-height: 2rem
@@ -54,7 +78,7 @@
         align-items: center
         justify-content: center
         padding: 12px 24px
-        width: 145px
+        width: 32%
         border: 1px solid var(--stroke)
         border-radius: 8px
 .radio

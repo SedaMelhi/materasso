@@ -73,8 +73,7 @@ const Order = () => {
             свяжется.
           </div>
         </div>
-        <div className={style.content__right}>
-          <form className={style.window}>
+        <form className={style.window}>
             <h3 className={style.window__title}>ЛИЧНЫЕ ДАННЫЕ</h3>
             <div className={style.window__text}>
               Введите свои данные и выберите удобный способ связи
@@ -139,7 +138,6 @@ const Order = () => {
               Оставьте заявку
             </button>
           </form>
-        </div>
       </div>
     </div>
   );

@@ -64,7 +64,7 @@ const Catalog = ({ menu }) => {
         <Path
           path={[
             { text: 'Главная', link: '/' },
-            { text: 'Каталог', link: '/catalog' },
+            { text: 'Каталог', link: '/categories' },
             { text: filters.name, link: `?page=1&category=${filters.categoryId}` },
           ]}
         />

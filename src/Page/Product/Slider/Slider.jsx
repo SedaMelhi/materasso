@@ -23,18 +23,14 @@ const Slider = ({ product }) => {
         spaceBetween={0}
         ref={swiperRef}
         slidesPerView={1}
-        modules={[Navigation, Pagination]}
-        navigation={{
-          prevEl: '.arrow-prev',
-          nextEl: '.arrow-next',
-          disabledClass: 'arrow-disabled',
-        }}
+        slidesPerGroup={1}
         pagination={{
           clickable: true,
           bulletClass: style.bullet,
           bulletActiveClass: style.active,
           wrapper: style.wrapper,
           renderBullet: function (index) {
+           if(product.images.length > 1){
             if (product.images[index]) {
               return `
                   <div class="${style.bullet} ${
@@ -45,6 +41,9 @@ const Slider = ({ product }) => {
             } else {
               return '';
             }
+           }else{
+            return ''
+           }
           },
           onClick: function (swiper, event) {
             swiper.slideTo(event.target.getAttribute('data-swiper-slide-index'));
