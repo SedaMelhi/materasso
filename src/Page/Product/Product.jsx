@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { setBasket } from './../../redux/basketSlice/basketSlice';
 import { useDispatch } from 'react-redux';
 import { setProductId } from '../../redux/productSlice/productSlice';
-import ContentLoader from 'react-content-loader';
 import Slider from './Slider/Slider';
 import qs from 'qs';
 import BasketSvg from '../../assets/svg/BasketSvg';
@@ -26,7 +25,7 @@ const Product = () => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       dispatch(setProductId(params.id));
-      fetch(`https://storefurniture.pythonanywhere.com/api/product/?id=${params.id}`)
+      fetch(`https://sadogroup.ru/api/product/?id=${params.id}`)
         .then((res) => res.json())
         .then((data) => {
           setProduct(data.results[0]);
@@ -38,7 +37,7 @@ const Product = () => {
   }, []);
   useEffect(() => {
     if (!window.location.search) {
-      fetch(`https://storefurniture.pythonanywhere.com/api/product/?id=${id}`)
+      fetch(`https://sadogroup.ru/api/product/?id=${id}`)
         .then((res) => res.json())
         .then((data) => {
           setProduct(data.results[0]);
@@ -83,7 +82,7 @@ const Product = () => {
   };
   const getData = () => {
     const params = `?id=${id}`;
-    fetch('https://storefurniture.pythonanywhere.com/api/product/' + params)
+    fetch('https://sadogroup.ru/api/product/' + params)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data.results[0]);

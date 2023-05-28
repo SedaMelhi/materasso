@@ -23,7 +23,7 @@ const Sale = ({ menu }) => {
   const dispatch = useDispatch();
 
   const getData = () => {
-    fetch('https://storefurniture.pythonanywhere.com/api/product/?sale__gt=0&page=' + page)
+    fetch('https://sadogroup.ru/api/product/?sale__gt=0&page=' + page)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

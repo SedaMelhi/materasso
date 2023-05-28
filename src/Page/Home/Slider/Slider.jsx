@@ -5,7 +5,7 @@ import style from './Slider.module.sass';
 import { useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-const Slider = () => {
+const Slider = ({ collections }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
@@ -25,50 +25,23 @@ const Slider = () => {
           prevEl: prevRef.current,
           nextEl: nextRef.current,
         }}>
-        <SwiperSlide>
-          <div className={`${style.slider} ${style.slider__one}`}>
-            <div className={style.center}>
-              <div className={style.subtitle}>Коллекция</div>
-              <div className={style.title}>МОНТЕ-КАРЛО</div>
-              <Link to="/collection" className={style.button}>
-                Просмотр
-              </Link>
+        {collections.map(({ id, images, name }) => (
+          <SwiperSlide key={id}>
+            <div
+              className={`${style.slider}`}
+              style={{
+                backgroundImage: `url(${images ? images[0].image : ''})`,
+              }}>
+              <div className={style.center}>
+                <div className={style.subtitle}>Коллекция</div>
+                <div className={style.title}>{name ? name : ''}</div>
+                <Link to="/collection" className={style.button}>
+                  Просмотр
+                </Link>
+              </div>
             </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={`${style.slider} ${style.slider__two}`}>
-            <div className={style.center}>
-              <div className={style.subtitle}>Коллекция</div>
-              <div className={style.title}>Сидней</div>
-              <Link to="/collection" className={style.button}>
-                Просмотр
-              </Link>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={`${style.slider} ${style.slider__three}`}>
-            <div className={style.center}>
-              <div className={style.subtitle}>Коллекция</div>
-              <div className={style.title}>Бруклин</div>
-              <Link to="/collection" className={style.button}>
-                Просмотр
-              </Link>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={`${style.slider} ${style.slider__four}`}>
-            <div className={style.center}>
-              <div className={style.subtitle}>Коллекция</div>
-              <div className={style.title}>Венеция</div>
-              <Link to="/collection" className={style.button}>
-                Просмотр
-              </Link>
-            </div>
-          </div>
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
         <div className={style.arrows}>
           <div ref={prevRef} className={style.arrow}>
             <svg

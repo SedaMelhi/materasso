@@ -3,9 +3,9 @@ import style from './Section.module.sass';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
-const Section = ({ title, subtitle, description, url, id }) => {
+const Section = ({ name, id, images, short_description, description }) => {
   const bg = {
-    background: `url(${url}) no-repeat center/cover`,
+    background: `url(${images[0].image}) no-repeat center/cover`,
     width: '100%',
     height: '387px',
     borderRadius: '15px',
@@ -22,8 +22,8 @@ const Section = ({ title, subtitle, description, url, id }) => {
           data-aos-easing="easy-out"
           data-aos-duration="1500"
           data-aos-once="true">
-          <div className={style.title}>{title}</div>
-          <div className={style.subtitle}>{subtitle}</div>
+          <div className={style.title}>Коллекция {name}</div>
+          <div className={style.subtitle}>{short_description}</div>
           <div className={style.description}>{description}</div>
           <div className={style.btn}>
             <Button text="Подробнее" />

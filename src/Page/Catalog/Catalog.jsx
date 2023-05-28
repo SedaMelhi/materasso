@@ -21,7 +21,7 @@ const Catalog = ({ menu }) => {
       const params =
         `?page=${filters.page}&category=${filters.categoryId}` +
         (filters.subId !== false ? `&subcategory=${filters.subId}` : '');
-      fetch('https://storefurniture.pythonanywhere.com/api/product/' + params)
+      fetch('https://sadogroup.ru/api/product/' + params)
         .then((res) => res.json())
         .then((data) => {
           setCatalog(data);
@@ -33,7 +33,7 @@ const Catalog = ({ menu }) => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      fetch('https://storefurniture.pythonanywhere.com/api/alldata/')
+      fetch('https://sadogroup.ru/api/alldata/')
         .then((res) => res.json())
         .then((data) => {
           const name = data.filter((item) => item.id === +params.category)[0].name_category;
@@ -77,7 +77,7 @@ const Catalog = ({ menu }) => {
           count={catalog.count}
           page={filters.page - 1}
           getData={getData}
-          url="https://storefurniture.pythonanywhere.com/api/product/"
+          url="https://sadogroup.ru/api/product/"
         />
       ) : (
         ''

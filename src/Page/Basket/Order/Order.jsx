@@ -40,7 +40,7 @@ const Order = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
     };
-    fetch('https://storefurniture.pythonanywhere.com/api/send_emai/', requestOptions)
+    fetch('https://sadogroup.ru/api/send_emai/', requestOptions)
       .then((response) => {
         if (response.ok) {
           console.log('Данные успешно отправлены');

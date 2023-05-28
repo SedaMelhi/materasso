@@ -16,9 +16,7 @@ const Basket = () => {
     const fetchData = async () => {
       const data = [];
       for (const item of basket) {
-        const response = await fetch(
-          `https://storefurniture.pythonanywhere.com/api/product/?id=${item.id}`,
-        );
+        const response = await fetch(`https://sadogroup.ru/api/product/?id=${item.id}`);
         const result = await response.json();
         const product = {
           ...result.results[0],

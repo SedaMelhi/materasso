@@ -17,10 +17,10 @@ import Collection from './Page/Collection/Collection';
 function App() {
   const [menu, setMenu] = useState([]);
   useEffect(() => {
-    fetch('https://storefurniture.pythonanywhere.com/api/menu/')
+    fetch('https://sadogroup.ru/api/menu/')
       .then((res) => res.json())
       .then((menu) => {
-        fetch('https://storefurniture.pythonanywhere.com/api/alldata/')
+        fetch('https://sadogroup.ru/api/alldata/')
           .then((res) => res.json())
           .then((categories) => {
             menu.map((item) => (item.products = []));
