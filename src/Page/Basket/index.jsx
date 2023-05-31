@@ -93,7 +93,7 @@ const Basket = () => {
           <div className={style.right}>
             <h3 className={style.headline}>Итого в корзине</h3>
             <div className={style.line}>
-              <div className={style.subtitle}>2 товара</div>
+              <div className={style.subtitle}>{getGoodsText(products.length)}</div>
             </div>
             <Line />
             <div className={style.line + ' ' + style.line__bottom}>

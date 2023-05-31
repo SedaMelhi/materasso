@@ -26,26 +26,38 @@ section
     line-height: 2.2rem
     color: var(--materasso)
     margin-bottom: 24px
-
+    &__skeleton
+        height: 34px 
 .subtitle
     font-size: 0.875rem
     line-height: 1.25rem
     color: var(--btn2)
     text-transform: uppercase
     margin-bottom: 24px
+    &__skeleton
+        height: 26px
+        width: 250px 
 
 .description
     color: var(--materasso)
     margin-bottom: 48px
+    min-height: 100px
     @media (max-width: 768px)
         margin-bottom: 32px
 
 .btn
+    &__skeleton
+        width: 151px 
+        height: 50px 
     @media (max-width: 768px)
         display: none
     &__mobile
         display: none
+        &__skeleton
+            height: 56px
         @media (max-width: 768px)
             display: block
             margin-top: 32px
-    
+.bg
+    height: 387px
+    border-radius: 15px

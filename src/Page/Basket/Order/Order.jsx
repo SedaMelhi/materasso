@@ -13,8 +13,31 @@ const Order = () => {
   const [data, setData] = useState({
     name: '',
     phone: '',
-    networks: '',
+    products: [],
+    order_total: 0,
   });
+  //   {
+  //     "phone": "123456789",
+  //     "name": "John Doe",
+  //     "products": [
+  //         {
+  //             "name": "Product 1",
+  //             "price": 10.99,
+  //             "quantity": 2,
+  //             "sale": 2,
+  //             "installment": true
+  //         },
+  //         {
+  //             "name": "Product 2",
+  //             "price": 19.99,
+  //             "quantity": 1,
+  //             "sale": 0,
+  //             "installment": true
+  //         }
+  //     ],
+  //     "order_total": 41.97
+
+  // }
   const [err, setErr] = useState(false);
   const changeData = (event) => {
     const { name, value } = event.target;
@@ -40,7 +63,7 @@ const Order = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
     };
-    fetch('https://sadogroup.ru/api/send_emai/', requestOptions)
+    fetch('https://sadogroup.ru/api/send_email/', requestOptions)
       .then((response) => {
         if (response.ok) {
           console.log('Данные успешно отправлены');

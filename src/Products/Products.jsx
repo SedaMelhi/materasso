@@ -18,7 +18,12 @@ const Products = ({ products, catalog }) => {
               catalog
                 ? () => {
                     dispatch(
-                      setFilters({ categoryId: id, name: name_category, subId: false, page: 1 }),
+                      setFilters({
+                        categoryId: id,
+                        name: name_category,
+                        subId: false,
+                        page: 1,
+                      }),
                     );
                   }
                 : () => {

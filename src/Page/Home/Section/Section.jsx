@@ -1,19 +1,40 @@
+import { useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import Button from './Button/Button';
+import 'aos/dist/aos.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 import style from './Section.module.sass';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useEffect } from 'react';
-const Section = ({ name, id, images, short_description, description }) => {
-  const bg = {
-    background: `url(${images[0].image}) no-repeat center/cover`,
-    width: '100%',
-    height: '387px',
-    borderRadius: '15px',
-  };
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setFilters } from '../../../redux/collectionSlice/collectionSlice';
+
+const Section = ({ name, id, images, short_description, description, load, link }) => {
+  const dispatch = useDispatch();
+  const bg = load
+    ? {
+        background: `url(${images[0].image}) no-repeat center/cover`,
+        width: '100%',
+        height: '387px',
+        borderRadius: '15px',
+      }
+    : '';
   useEffect(() => {
     AOS.init();
   }, []);
-  return (
+  const changeFilters = () => {
+    //{ page: '', collection: '', material: '', color: '', style: '' }
+    dispatch(
+      setFilters({
+        page: 1,
+        collection: id,
+        material: '',
+        color: '',
+        style: '',
+      }),
+    );
+  };
+  return load ? (
     <section>
       <div className={`${style.section} ${id % 2 === 1 ? style.section__reverse : ''}`}>
         <div
@@ -22,11 +43,17 @@ const Section = ({ name, id, images, short_description, description }) => {
           data-aos-easing="easy-out"
           data-aos-duration="1500"
           data-aos-once="true">
-          <div className={style.title}>Коллекция {name}</div>
+          {load ? (
+            <div className={style.title}>Коллекция {name}</div>
+          ) : (
+            <Skeleton className={style.title} />
+          )}
           <div className={style.subtitle}>{short_description}</div>
           <div className={style.description}>{description}</div>
           <div className={style.btn}>
-            <Button text="Подробнее" />
+            <Link to="../collcatalog" onClick={changeFilters}>
+              <Button text="Подробнее" />
+            </Link>
           </div>
         </div>
         <div
@@ -38,8 +65,25 @@ const Section = ({ name, id, images, short_description, description }) => {
           <div className="img" style={bg}></div>
         </div>
         <div className={style.btn__mobile}>
-          <Button text="Подробнее" />
+          <Link to="catalog">
+            <Button text="Подробнее" />
+          </Link>
         </div>
+      </div>
+    </section>
+  ) : (
+    <section>
+      <div className={style.section}>
+        <div className={style.section__left}>
+          <Skeleton className={style.title + ' ' + style.title__skeleton} />
+          <Skeleton className={style.subtitle + ' ' + style.subtitle__skeleton} />
+          <Skeleton className={style.description} />
+          <Skeleton className={style.btn + ' ' + style.btn__skeleton} />
+        </div>
+        <div className={style.section__right}>
+          <Skeleton className={style.bg} style={bg} />
+        </div>
+        <Skeleton className={style.btn__mobile + ' ' + style.btn__mobile__skeleton} />
       </div>
     </section>
   );

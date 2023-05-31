@@ -27,11 +27,11 @@ const Collection = () => {
       />
       <h2 className={style.title}>Коллекции</h2>
       {load ? (
-        collections.map((item) => <Section {...item} key={item.id} />)
+        collections.map((item) => <Section {...item} key={item.id} load={load} />)
       ) : (
         <>
-          <SliderLoader />
-          <SliderLoader />
+          <Section load={load} />
+          <Section load={load} />
         </>
       )}
     </div>

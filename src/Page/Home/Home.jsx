@@ -1,7 +1,6 @@
 // import style from './Home.module.sass';
 import Section from './Section/Section';
 import Slider from './Slider/Slider';
-import SliderLoader from '../Collection/SliderLoader';
 import { useEffect, useState } from 'react';
 
 const Home = () => {
@@ -19,11 +18,16 @@ const Home = () => {
 
   return (
     <div>
-      {load ? <Slider collections={collections} /> : <SliderLoader />}
+      <Slider collections={collections} load={load} />
       <div className="main wrap">
-        {collections.map((item) => (
-          <Section {...item} key={item.id} />
-        ))}
+        {load ? (
+          collections.map((item) => <Section {...item} key={item.id} load={load} />)
+        ) : (
+          <>
+            <Section load={load} />
+            <Section load={load} />
+          </>
+        )}
       </div>
     </div>
   );

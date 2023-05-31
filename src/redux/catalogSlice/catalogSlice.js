@@ -13,6 +13,6 @@ export const catalogSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setFilters, setProduct } = catalogSlice.actions;
+export const { setFilters } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

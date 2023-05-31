@@ -48,7 +48,12 @@ const DropMenu = ({ menu, catalog, name }) => {
               key={id}
               onClick={() => {
                 dispatch(
-                  setFilters({ categoryId: id, name: name_category, subId: false, page: 1 }),
+                  setFilters({
+                    categoryId: id,
+                    name: name_category,
+                    subId: false,
+                    page: 1,
+                  }),
                 );
               }}>
               <Link to="/catalog">{name_category}</Link>

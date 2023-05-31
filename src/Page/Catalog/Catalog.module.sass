@@ -20,3 +20,44 @@
     margin-top: 100px
     text-align: center
     
+.pagination
+    &__wrap
+        margin-top: 37px
+    display: flex
+    list-style-type: none
+    align-items: center
+    justify-content: center
+    
+.number
+    color: var(--text)
+    font-size: 1.25rem
+    line-height: 2rem
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 34px
+    height: 34px
+    margin: 0 10px
+    cursor: pointer
+    border: 1px solid #0000
+    transition: .2s
+    border-radius: 50%
+.previous
+    margin-right: 16px
+    cursor: pointer
+    transition: .2s
+    svg
+        width: 6px
+
+.next
+    margin-left: 16px
+    cursor: pointer
+    transition: .2s
+    svg
+        width: 6px
+    
+
+
+.active
+    border: 1px solid var(--text)
+    

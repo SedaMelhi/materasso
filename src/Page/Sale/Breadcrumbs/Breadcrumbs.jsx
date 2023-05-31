@@ -11,7 +11,12 @@ const Breadcrumbs = ({ category, setCategory }) => {
       onClick={() => {
         setCategory(false);
         dispatch(
-          setFilters({ categoryId: filters.categoryId, name: filters.name, subId: false, page: 1 }),
+          setFilters({
+            categoryId: filters.categoryId,
+            name: filters.name,
+            subId: false,
+            page: 1,
+          }),
         );
       }}>
       <div className={style.breadcrumb + (category === '' ? ' hidden' : '')}>{category}</div>
