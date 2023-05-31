@@ -21,6 +21,7 @@ const Product = () => {
   const [load, setLoad] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -44,6 +45,29 @@ const Product = () => {
         });
     }
   }, [id]);
+  //   {
+  //     "phone": "123456789",
+  //     "name": "John Doe",
+  //      "networks": "telegram "
+  //     "products": [
+  //         {
+  //             "name": "Product 1",
+  //             "price": 10.99,
+  //             "quantity": 2,
+  //             "sale": 2,
+  //             "installment": true
+  //         },
+  //         {
+  //             "name": "Product 2",
+  //             "price": 19.99,
+  //             "quantity": 1,
+  //             "sale": 0,
+  //             "installment": true
+  //         }
+  //     ],
+  //     "order_total": 41.97
+
+  // }
   const addProduct = (installment) => {
     for (let item of basket) {
       if (item.id === id) {
@@ -119,7 +143,31 @@ const Product = () => {
                   <div className={style.detail__title}>О товаре</div>
                   <div className={style.detail__row}>
                     <div className={style.detail__subtitle}>Артикул</div>
-                    <div className={style.detail__text}>{product.sku}</div>
+                    <div className={style.detail__text}>{product.about_product.sku}</div>
+                  </div>
+                  <div className={style.detail__row}>
+                    <div className={style.detail__subtitle}>Ширина</div>
+                    <div className={style.detail__text}>{product.about_product.width}</div>
+                  </div>
+                  <div className={style.detail__row}>
+                    <div className={style.detail__subtitle}>Высота</div>
+                    <div className={style.detail__text}>{product.about_product.height}</div>
+                  </div>
+                  <div className={style.detail__row}>
+                    <div className={style.detail__subtitle}>Страна</div>
+                    <div className={style.detail__text}>{product.about_product.country}</div>
+                  </div>
+                  <div className={style.detail__row}>
+                    <div className={style.detail__subtitle}>Цвет</div>
+                    <div className={style.detail__text}>{product.about_product.color}</div>
+                  </div>
+                  <div className={style.detail__row}>
+                    <div className={style.detail__subtitle}>Материал</div>
+                    <div className={style.detail__text}>{product.about_product.material}</div>
+                  </div>
+                  <div className={style.detail__row}>
+                    <div className={style.detail__subtitle}>Стиль</div>
+                    <div className={style.detail__text}>{product.about_product.style}</div>
                   </div>
                 </div>
                 <div className={style.detail}>
