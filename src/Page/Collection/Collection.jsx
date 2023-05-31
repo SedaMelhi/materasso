@@ -1,7 +1,6 @@
 import Path from './../../components/Path/Path';
 import style from './Collection.module.sass';
 import Section from './../Home/Section/Section';
-import SliderLoader from './SliderLoader';
 import { useEffect, useState } from 'react';
 
 const Collection = () => {

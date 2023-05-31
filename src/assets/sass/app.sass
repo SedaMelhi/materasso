@@ -104,15 +104,24 @@ input[type='number']::-webkit-outer-spin-button
 
 input[type='number'] 
   -moz-appearance: textfield
-
+.load
+  &_width
+    height: 32px
 .lds-spinner 
   display: block
   position: relative
   width: 80px
   height: 80px
   margin: 30vh auto
+  &__small
+    margin: 150px auto 50px
+  &_width
+    margin: 0 auto
+    transform: scale(.35) translateY(-65px)
   @media (max-width: 560px)
     transform: scale(0.6)
+    &_width
+      transform: scale(.35) translateY(-65px)
 .lds-spinner div 
   transform-origin: 40px 40px
   animation: lds-spinner 1.2s linear infinite
@@ -156,11 +165,9 @@ input[type='number']
 .lds-spinner div:nth-child(10) 
   transform: rotate(270deg)
   animation-delay: -0.2s
-
 .lds-spinner div:nth-child(11) 
   transform: rotate(300deg)
   animation-delay: -0.1s
-
 .lds-spinner div:nth-child(12) 
   transform: rotate(330deg)
   animation-delay: 0s

@@ -43,7 +43,6 @@ const CollectionCatalog = () => {
         setLoad(true);
       });
     navigate(params);
-    console.log('https://sadogroup.ru/api/product/' + params);
   };
 
   useEffect(() => {

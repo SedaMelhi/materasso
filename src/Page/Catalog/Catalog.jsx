@@ -15,7 +15,6 @@ const Catalog = ({ menu }) => {
   const [category, setCategory] = useState(false);
   const [catalog, setCatalog] = useState({ results: [] });
   const [load, setLoad] = useState(false);
-  console.log(menu);
   const getData = () => {
     if (filters.categoryId !== false) {
       const params =

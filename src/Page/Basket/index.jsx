@@ -6,13 +6,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { setBasket } from '../../redux/basketSlice/basketSlice';
 import { Link } from 'react-router-dom';
+import { setOrderTotal } from '../../redux/basketSlice/basketSlice';
+
 const Basket = () => {
   const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [load, setLoad] = useState(false);
   const basket = useSelector((state) => state.basket.basket);
+  const order_total = useSelector((state) => state.basket.order_total);
   const dispatch = useDispatch();
   useEffect(() => {
     let sum = 0;
+    setLoad(false);
     const fetchData = async () => {
       const data = [];
       for (const item of basket) {
@@ -23,6 +27,8 @@ const Basket = () => {
           countProducts: item.count,
           installment: item.installment,
         };
+        console.log(result);
+        setLoad(true);
         data.push(product);
       }
       setProducts(data);
@@ -31,7 +37,10 @@ const Basket = () => {
     basket.forEach(({ price, count, sale }) => {
       sum += (count * (+price * (100 - sale))) / 100;
     });
-    setTotalPrice(sum);
+    dispatch(setOrderTotal(sum));
+    if (basket.length === 0) {
+      setLoad(true);
+    }
   }, [basket]);
   const getGoodsText = (quantity) => {
     let text = 'товар';
@@ -48,28 +57,7 @@ const Basket = () => {
     }
     return `${quantity} ${text}`;
   };
-  //   {
-  //     "phone": "123456789",
-  //     "name": "John Doe",
-  //      "networks": "telegram "
-  //     "products": [
-  //         {
-  //             "name": "Product 1",
-  //             "price": 10.99,
-  //             "quantity": 2,
-  //             "sale": 2,
-  //             "installment": true
-  //         },
-  //         {
-  //             "name": "Product 2",
-  //             "price": 19.99,
-  //             "quantity": 1,
-  //             "sale": 0,
-  //             "installment": true
-  //         }
-  //     ],
-  //     "order_total": 41.97
-  // }
+  console.log(order_total, basket);
   return (
     <div className={style.basket}>
       <div className="wrap">
@@ -82,50 +70,71 @@ const Basket = () => {
         <h2 className={style.title}>Корзина</h2>
         <div className={style.subtitle}>{getGoodsText(products.length)}</div>
         <Line />
-        <div className={style.content}>
-          <div className={style.left}>
-            <div className={style.del__wrap}>
-              {products.length > 0 && (
-                <button className={style.del} onClick={() => dispatch(setBasket([]))}>
-                  Удалить всё
-                </button>
-              )}
+        {load ? (
+          <div className={style.content}>
+            <div className={style.left}>
+              <div className={style.del__wrap}>
+                {products.length > 0 && (
+                  <button className={style.del} onClick={() => dispatch(setBasket([]))}>
+                    Удалить всё
+                  </button>
+                )}
+              </div>
+              <div className={style.products}>
+                {products.length > 0 && <Line />}
+                {products.length > 0
+                  ? products.map(
+                      ({ name, id, countProducts, images, price, sale, installment }) => (
+                        <div key={id}>
+                          <BasketItem
+                            name={name}
+                            id={id}
+                            count={countProducts}
+                            image={images[0].image}
+                            price={price}
+                            sale={sale}
+                            installment={installment}
+                          />
+                          <Line />
+                        </div>
+                      ),
+                    )
+                  : ''}
+              </div>
             </div>
-            <div className={style.products}>
-              {products.length > 0 && <Line />}
-              {products.length > 0
-                ? products.map(({ name, id, countProducts, images, price, sale, installment }) => (
-                    <div key={id}>
-                      <BasketItem
-                        name={name}
-                        id={id}
-                        count={countProducts}
-                        image={images[0].image}
-                        price={price}
-                        sale={sale}
-                        installment={installment}
-                      />
-                      <Line />
-                    </div>
-                  ))
-                : ''}
+            <div className={style.right}>
+              <h3 className={style.headline}>Итого в корзине</h3>
+              <div className={style.line}>
+                <div className={style.subtitle}>{getGoodsText(products.length)}</div>
+              </div>
+              <Line />
+              <div className={style.line + ' ' + style.line__bottom}>
+                Общая стоимость
+                <div className={style.subtitle}>{order_total} ₽</div>
+              </div>
+              <Link to={basket.length > 0 ? '../basket/order' : ''}>
+                <div className={style.btn}>Перейти к оформление</div>
+              </Link>
             </div>
           </div>
-          <div className={style.right}>
-            <h3 className={style.headline}>Итого в корзине</h3>
-            <div className={style.line}>
-              <div className={style.subtitle}>{getGoodsText(products.length)}</div>
+        ) : (
+          <div className="load load__small">
+            <div className="lds-spinner lds-spinner__small">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
-            <Line />
-            <div className={style.line + ' ' + style.line__bottom}>
-              Общая стоимость
-              <div className={style.subtitle}>{totalPrice} ₽</div>
-            </div>
-            <Link to={basket.length > 0 ? '../basket/order' : ''}>
-              <div className={style.btn}>Перейти к оформление</div>
-            </Link>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
