@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const basketSlice = createSlice({
   name: 'basket',
   initialState: {
-    basket: [],
+    basket: localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [],
     order_total: 0,
   },
   reducers: {

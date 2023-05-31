@@ -14,9 +14,11 @@ import Basket from './Page/Basket';
 import Order from './Page/Basket/Order/Order';
 import Collection from './Page/Collection/Collection';
 import CollectionCatalog from './Page/CollectionCatalog/CollectionCatalog';
+import { useSelector } from 'react-redux';
 
 function App() {
   const [menu, setMenu] = useState([]);
+  const basket = useSelector((state) => state.basket.basket);
   useEffect(() => {
     fetch('https://sadogroup.ru/api/menu/')
       .then((res) => res.json())
@@ -40,6 +42,12 @@ function App() {
           });
       });
   }, []);
+  useEffect(() => {
+    const json = JSON.stringify(basket);
+    localStorage.setItem('basket', json);
+    console.log('json', JSON.parse(localStorage.getItem('basket')));
+  }, [basket]);
+
   return (
     <div className="App">
       <Header menu={menu} />

@@ -16,7 +16,6 @@ const Basket = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     let sum = 0;
-    setLoad(false);
     const fetchData = async () => {
       const data = [];
       for (const item of basket) {
@@ -27,7 +26,7 @@ const Basket = () => {
           countProducts: item.count,
           installment: item.installment,
         };
-        console.log(result);
+
         setLoad(true);
         data.push(product);
       }
@@ -57,7 +56,9 @@ const Basket = () => {
     }
     return `${quantity} ${text}`;
   };
-  console.log(order_total, basket);
+  useEffect(() => {
+    setLoad(false);
+  }, []);
   return (
     <div className={style.basket}>
       <div className="wrap">

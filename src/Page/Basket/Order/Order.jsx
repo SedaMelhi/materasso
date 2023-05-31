@@ -66,8 +66,6 @@ const Order = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
     };
-    console.log(order_total, basket);
-    console.log(newData);
     fetch('https://sadogroup.ru/api/send_email/', requestOptions)
       .then((response) => {
         if (response.ok) {
