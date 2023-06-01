@@ -39,8 +39,8 @@ const Footer = () => {
             </div>
             <div className={style.column}>
               <h3 className={style.title}>Контакты</h3>
-              <a href="mailto: Materasso.chr@mail.ru" className={style.link}>
-                Materasso.chr@mail.ru
+              <a href="mailto: materasso.chr@mail.ru" className={style.link}>
+                materasso.chr@mail.ru
               </a>
               <a href="tel:+79639811288" className={style.link}>
                 + 7 (963) 981 - 12 - 88

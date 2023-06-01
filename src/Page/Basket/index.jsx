@@ -114,7 +114,7 @@ const Basket = () => {
                 <div className={style.subtitle}>{order_total} ₽</div>
               </div>
               <Link to={basket.length > 0 ? '../basket/order' : ''}>
-                <div className={style.btn}>Перейти к оформление</div>
+                <div className={style.btn}>Перейти к оформлению</div>
               </Link>
             </div>
           </div>
