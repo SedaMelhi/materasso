@@ -22,7 +22,7 @@ const Footer = () => {
               <Link to="/collection" className={style.link}>
                 Коллекции
               </Link>
-              <Link to="/" className={style.link}>
+              <Link to="/buyer" className={style.link}>
                 Покупателям
               </Link>
             </div>

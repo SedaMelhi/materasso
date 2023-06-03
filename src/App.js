@@ -15,6 +15,7 @@ import Order from './Page/Basket/Order/Order';
 import Collection from './Page/Collection/Collection';
 import CollectionCatalog from './Page/CollectionCatalog/CollectionCatalog';
 import { useSelector } from 'react-redux';
+import Buyer from './Page/Buyer';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -45,13 +46,12 @@ function App() {
   useEffect(() => {
     const json = JSON.stringify(basket);
     localStorage.setItem('basket', json);
-    console.log('json', JSON.parse(localStorage.getItem('basket')));
   }, [basket]);
 
   return (
     <div className="App">
       <Header menu={menu} />
-      <div>
+      <div className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="sale" element={<Sale menu={menu} />} />
@@ -62,6 +62,7 @@ function App() {
           <Route path="basket/order" element={<Order />} />
           <Route path="collection" element={<Collection />} />
           <Route path="collcatalog" element={<CollectionCatalog />} />
+          <Route path="buyer" element={<Buyer />} />
         </Routes>
       </div>
       <Footer />

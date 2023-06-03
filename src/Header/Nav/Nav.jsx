@@ -7,7 +7,7 @@ const Nav = () => {
       <div className="wrap">
         <div className={style.nav}>
           <div className={style.menu}>
-            <Link to="/" className={style.menu__item}>
+            <Link to="/buyer" className={style.menu__item}>
               Покупателям
             </Link>
             <Link to="/" className={style.menu__item}>

@@ -36,7 +36,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
       // { name: 'Матрасы', link: '/' },
       // { name: 'Мягкая мебель', link: '/' },
       // { name: 'Обеденные группы', link: '/' },
-      { name: 'Покупателям', link: '/' },
+      { name: 'Покупателям', link: '/buyer' },
       { name: 'Партнерам', link: '/' },
       { name: 'О нас', link: '/' },
       { name: 'Контакты', link: '/' },

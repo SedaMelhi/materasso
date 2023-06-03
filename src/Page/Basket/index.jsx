@@ -28,6 +28,7 @@ const Basket = () => {
         };
 
         setLoad(true);
+
         data.push(product);
       }
       setProducts(data);
@@ -57,8 +58,11 @@ const Basket = () => {
     return `${quantity} ${text}`;
   };
   useEffect(() => {
-    setLoad(false);
+    if (basket.length !== 0) {
+      setLoad(false);
+    }
   }, []);
+
   return (
     <div className={style.basket}>
       <div className="wrap">
