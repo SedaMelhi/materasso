@@ -3,7 +3,7 @@ import style from './Sort.module.sass';
 
 import { useState } from 'react';
 const Sort = ({ sort, setSort }) => {
-  const filterItems = ['Сначала новые', 'По популярности', 'По цене'];
+  const filterItems = ['Сначала новые', 'По возрастанию цены', 'По убыванию цены'];
   const [selectShow, setSelectShow] = useState(false);
   return (
     <div
