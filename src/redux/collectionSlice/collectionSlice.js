@@ -3,7 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const collectionSlice = createSlice({
   name: 'collection',
   initialState: {
-    filters: { page: '', collection: '', material: '', color: '', style: '', name: '' },
+    filters: {
+      page: '',
+      collection: '',
+      material: '',
+      color: '',
+      style: '',
+      name: '',
+      quantity: '',
+    },
   },
   reducers: {
     setFilters(state, { payload }) {

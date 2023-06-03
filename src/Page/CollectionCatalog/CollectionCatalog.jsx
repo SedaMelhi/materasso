@@ -12,7 +12,7 @@ import style from './../Catalog/Catalog.module.sass';
 import collection from './Collection.module.sass';
 import Line from '../../components/Line/Line';
 import Title from '../../components/Title/Title';
-// import Filter from './Filter/Filter';
+import Filter from './Filter/Filter';
 
 const CollectionCatalog = () => {
   const filters = useSelector((state) => state.collection.filters);
@@ -25,6 +25,9 @@ const CollectionCatalog = () => {
     images: [{ image: '' }],
   });
   const [load, setLoad] = useState(false);
+  const [colors, setColors] = useState([]);
+  const [materials, setMaterials] = useState([]);
+  const [styles, setStyles] = useState([]);
   const getData = () => {
     let params = `?page=${filters.page}&collection=${filters.collection}`;
     if (filters.material !== '') {
@@ -36,6 +39,12 @@ const CollectionCatalog = () => {
     if (filters.style !== '') {
       params += `&style=${filters.style}`;
     }
+    if (filters.quantity !== '') {
+      console.log(filters.quantity);
+      if (filters.quantity === 'В наличии') {
+        params += `&quantity=1`;
+      }
+    }
     fetch('https://sadogroup.ru/api/product/' + params)
       .then((res) => res.json())
       .then((data) => {
@@ -44,7 +53,7 @@ const CollectionCatalog = () => {
       });
     navigate(params);
   };
-
+  console.log(filters);
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -54,12 +63,32 @@ const CollectionCatalog = () => {
           color: params.color ?? '',
           style: params.style ?? '',
           material: params.material ?? '',
+          quantity: params.quantity ? 1 : '',
           page: +params.page ? params.page : 1,
         }),
       );
       setLoad(false);
     }
+    fetch('https://sadogroup.ru/api/colors')
+      .then((res) => res.json())
+      .then((data) => {
+        data.pop();
+        setColors(data);
+      });
+    fetch('https://sadogroup.ru/api/materials')
+      .then((res) => res.json())
+      .then((data) => {
+        data.pop();
+        setMaterials(data);
+      });
+    fetch('https://sadogroup.ru/api/style')
+      .then((res) => res.json())
+      .then((data) => {
+        data.pop();
+        setStyles(data);
+      });
   }, []);
+
   useEffect(() => {
     if (catalog.results[0]) {
       setCollectionObj(catalog.results[0].collection);
@@ -77,6 +106,7 @@ const CollectionCatalog = () => {
         collection: filters.collection,
         material: filters.material,
         color: filters.color,
+        quantity: filters.quantity,
         style: filters.style,
       }),
     );
@@ -104,7 +134,12 @@ const CollectionCatalog = () => {
         }}></div>
       <div className={collection.title}>Коллекция {collectionObj.name}</div>
       <div className={collection.description}>{collectionObj.description}</div>
-      {/* <Filter category={'sasdas'} menu={catalog} /> */}
+      <div className={collection.filters}>
+        <Filter filterItems={colors} type={{ en: 'color', ru: 'Цвет' }} />
+        <Filter filterItems={materials} type={{ en: 'material', ru: 'Материал' }} />
+        <Filter filterItems={styles} type={{ en: 'style', ru: 'Стиль' }} />
+        <Filter filterItems={['Все', 'В наличии']} type={{ en: 'quantity', ru: 'Все' }} />
+      </div>
       <CatalogData catalog={catalog} load={load} />
       {catalog.count > 9 ? (
         <div className={style.pagination__wrap}>

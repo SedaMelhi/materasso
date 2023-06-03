@@ -31,6 +31,7 @@ const Section = ({ name, id, images, short_description, description, load, link 
         material: '',
         color: '',
         style: '',
+        quantity: '',
       }),
     );
   };
