@@ -39,6 +39,12 @@ const CollectionCatalog = () => {
     if (filters.style !== '') {
       params += `&style=${filters.style}`;
     }
+    if (filters.price.max !== '') {
+      params += `&max_price=${filters.price.max}`;
+    }
+    if (filters.price.min !== '') {
+      params += `&min_price=${filters.price.min}`;
+    }
     if (filters.quantity !== '') {
       console.log(filters.quantity);
       if (filters.quantity === 'В наличии') {
@@ -53,7 +59,7 @@ const CollectionCatalog = () => {
       });
     navigate(params);
   };
-  console.log(filters);
+
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -65,6 +71,7 @@ const CollectionCatalog = () => {
           material: params.material ?? '',
           quantity: params.quantity ? 1 : '',
           page: +params.page ? params.page : 1,
+          price: { min: params.min_price ?? '', max: params.max_price ?? '' },
         }),
       );
       setLoad(false);
@@ -108,6 +115,7 @@ const CollectionCatalog = () => {
         color: filters.color,
         quantity: filters.quantity,
         style: filters.style,
+        price: { min: filters.price.min, max: filters.price.max },
       }),
     );
   };
@@ -139,6 +147,40 @@ const CollectionCatalog = () => {
         <Filter filterItems={materials} type={{ en: 'material', ru: 'Материал' }} />
         <Filter filterItems={styles} type={{ en: 'style', ru: 'Стиль' }} />
         <Filter filterItems={['Все', 'В наличии']} type={{ en: 'quantity', ru: 'Все' }} />
+        <div className={collection.filter}>
+          Цена от:
+          <input
+            type="number"
+            name="priceFrom"
+            className={collection.filter__number}
+            value={filters.price.min}
+            onChange={(event) => {
+              dispatch(
+                setFilters({
+                  ...filters,
+                  price: { min: event.target.value, max: filters.price.max },
+                }),
+              );
+            }}
+          />
+        </div>
+        <div className={collection.filter}>
+          Цена до:
+          <input
+            type="number"
+            name="priceTo"
+            className={collection.filter__number}
+            value={filters.price.max}
+            onChange={(event) => {
+              dispatch(
+                setFilters({
+                  ...filters,
+                  price: { max: event.target.value, min: filters.price.min },
+                }),
+              );
+            }}
+          />
+        </div>
       </div>
       <CatalogData catalog={catalog} load={load} />
       {catalog.count > 9 ? (

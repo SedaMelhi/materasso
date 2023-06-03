@@ -11,6 +11,7 @@ export const collectionSlice = createSlice({
       style: '',
       name: '',
       quantity: '',
+      price: { min: '', max: '' },
     },
   },
   reducers: {

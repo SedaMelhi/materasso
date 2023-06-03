@@ -1,7 +1,7 @@
 import style from './Filter.module.sass';
 import ArrowSvg from '../../../assets/svg/ArrowSvg';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { setFilters } from './../../../redux/collectionSlice/collectionSlice';
 import { useDispatch } from 'react-redux';
 const Filter = ({ filterItems, type }) => {

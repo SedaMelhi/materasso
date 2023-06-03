@@ -23,7 +23,6 @@ const Section = ({ name, id, images, short_description, description, load, link 
     AOS.init();
   }, []);
   const changeFilters = () => {
-    //{ page: '', collection: '', material: '', color: '', style: '' }
     dispatch(
       setFilters({
         page: 1,
@@ -32,6 +31,7 @@ const Section = ({ name, id, images, short_description, description, load, link 
         color: '',
         style: '',
         quantity: '',
+        price: { min: '', max: '' },
       }),
     );
   };
