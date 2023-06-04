@@ -21,7 +21,7 @@ const Home = () => {
       <Slider collections={collections} load={load} />
       <div className="main wrap">
         {load ? (
-          collections.map((item) => <Section {...item} key={item.id} load={load} />)
+          collections.map((item, i) => <Section {...item} key={item.id} load={load} step={i} />)
         ) : (
           <>
             <Section load={load} />

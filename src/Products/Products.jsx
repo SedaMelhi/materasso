@@ -1,16 +1,70 @@
 import style from './Products.module.sass';
 import bread from '../Page/Sale/Breadcrumbs/Breadcrumbs.module.sass';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from './../redux/catalogSlice/catalogSlice';
 import { setProductId } from './../redux/productSlice/productSlice';
 import { Link } from 'react-router-dom';
+import { setBasket } from './../redux/basketSlice/basketSlice';
 
 const Products = ({ products, catalog }) => {
   const dispatch = useDispatch();
+  const basket = useSelector((state) => state.basket.basket);
+  const addProduct = (event, id, sale, price, name) => {
+    event.preventDefault();
+    if (basket.filter((item) => item.id === id).length === 0) {
+      for (let item of basket) {
+        if (item.id === id) {
+          dispatch(
+            setBasket(
+              basket.map((item) =>
+                item.id === id
+                  ? {
+                      id: id,
+                      count: item.count + 1,
+                      sale: sale,
+                      price: price,
+                      name: name,
+                      installment: false,
+                    }
+                  : item,
+              ),
+            ),
+          );
+          return true;
+        }
+      }
+      dispatch(
+        setBasket([
+          ...basket,
+          {
+            id: id,
+            count: 1,
+            sale: sale,
+            price: price,
+            name: name,
+            installment: false,
+          },
+        ]),
+      );
+    } else {
+      dispatch(setBasket(basket.filter((item) => item.id !== id)));
+    }
+  };
+
   return (
     <div className={style.products}>
       {products.map(
-        ({ sale, images, image, subcategory, price, short_description, id, name_category }) => (
+        ({
+          sale,
+          images,
+          image,
+          subcategory,
+          price,
+          short_description,
+          id,
+          name_category,
+          name,
+        }) => (
           <Link
             to={catalog ? '../catalog' : '../product'}
             key={id}
@@ -40,7 +94,17 @@ const Products = ({ products, catalog }) => {
                     {sale ? (
                       <div className={style.sale}>-{sale}</div>
                     ) : (
-                      <div className={style.basket + ' ' + style.basket__right}>
+                      <div
+                        className={
+                          style.basket +
+                          ' ' +
+                          style.basket__right +
+                          ' ' +
+                          (basket.filter((item) => item.id === id).length > 0
+                            ? style.basket__active
+                            : '')
+                        }
+                        onClick={(event) => addProduct(event, id, sale, price, name)}>
                         <svg
                           width="25"
                           height="25"

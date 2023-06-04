@@ -24,6 +24,9 @@ const Catalog = ({ menu }) => {
         params += '&ordering=-date';
       }
       if (filters.sort === 'max') {
+        params += '&max_price=999999999';
+      }
+      if (filters.sort === 'min') {
         params += '&max_price=999999999&min_price=0';
       }
       fetch('https://sadogroup.ru/api/product/' + params)
@@ -49,7 +52,13 @@ const Catalog = ({ menu }) => {
               name: name,
               subId: +params.subcategory ? params.subcategory : false,
               page: +params.page ? params.page : 1,
-              sort: params.ordering ? 'ordering' : '',
+              sort: params.ordering
+                ? 'ordering'
+                : params.min_price
+                ? 'min'
+                : params.max_price
+                ? 'max'
+                : '',
             }),
           );
         });

@@ -24,51 +24,69 @@ const Sale = ({ menu }) => {
   const filters = useSelector((state) => state.catalog.filters);
   const getData = () => {
     setUpdate(false);
-    fetch(
-      'https://sadogroup.ru/api/product/?sale__gt=0&page=' +
-        page +
-        (filters.sort !== ''
-          ? filters.sort === 'ordering'
-            ? '&ordering=-date'
-            : filters.sort === 'max'
-            ? '&max_price=999999999&min_price=0'
-            : ''
-          : ''),
-    )
+    let params = `?sale__gt=0&page=${page}`;
+    if (filters.sort === 'ordering') {
+      params += '&ordering=-date';
+    }
+    if (filters.sort === 'max') {
+      params += '&max_price=999999999';
+    }
+    if (filters.sort === 'min') {
+      params += '&max_price=999999999&min_price=0';
+    }
+    fetch('https://sadogroup.ru/api/product/' + params)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoad(true);
       });
-    navigate(
-      '?page=' +
-        page +
-        (filters.sort !== ''
-          ? filters.sort === 'ordering'
-            ? '&ordering=-date'
-            : filters.sort === 'max'
-            ? '&max_price=999999999&min_price=0'
-            : ''
-          : ''),
-    );
+    navigate(params);
   };
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      if (params.min_price) {
+        setSort({
+          value: 'По убыванию цены',
+          id: 2,
+        });
+      } else if (params.max_price) {
+        setSort({
+          value: 'По возрастанию цены',
+          id: 1,
+        });
+      }
+      dispatch(setPage(+params.page));
+      dispatch(
+        setFilters({
+          categoryId: false,
+          name: '',
+          subId: false,
+          page: 1,
+          sort: params.ordering
+            ? 'ordering'
+            : params.min_price
+            ? 'min'
+            : params.max_price
+            ? 'max'
+            : '',
+        }),
+      );
+    } else {
+      setUpdate(true);
+      return () => {
+        dispatch(setPage(1));
+      };
+    }
+  }, []);
   useEffect(() => {
     setLoad(false);
     if (update) {
       getData();
     }
-  }, [page, update]);
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      dispatch(setPage(+params.page));
-    }
-    setUpdate(true);
-    dispatch(setFilters({ categoryId: false, name: '', subId: false, page: 1, sort: '' }));
-    return () => {
-      dispatch(setPage(1));
-    };
-  }, []);
+  }, [page, update, filters]);
+
   useEffect(() => {
     if (sort.id === 0) {
       setUpdate(true);

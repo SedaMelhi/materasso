@@ -6,7 +6,8 @@ import Telegram from '../../../assets/svg/Telegram';
 import CallSvg from '../../../assets/svg/CallSvg';
 import InputMask from 'react-input-mask';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBasket, setOrderTotal } from './../../../redux/basketSlice/basketSlice';
 
 const Order = () => {
   const basket = useSelector((state) => state.basket.basket);
@@ -21,6 +22,7 @@ const Order = () => {
   const [err, setErr] = useState(false);
   const [errCount, setErrCount] = useState(false);
   const [status, setStatus] = useState(false);
+  const dispatch = useDispatch();
   const changeData = (event) => {
     const { name, value } = event.target;
     setData((prevData) => ({
@@ -67,12 +69,14 @@ const Order = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
     };
-    console.log(newData);
+
     fetch('https://sadogroup.ru/api/send_email/', requestOptions)
       .then((response) => {
         if (response.ok) {
           setLoad(false);
           setStatus('yes');
+          dispatch(setBasket([]));
+          dispatch(setOrderTotal(0));
         } else {
           setLoad(false);
           setStatus(true);
@@ -87,6 +91,8 @@ const Order = () => {
         if (response.ok) {
           setLoad(false);
           setStatus('yes');
+          dispatch(setBasket([]));
+          dispatch(setOrderTotal(0));
         } else {
           setLoad(false);
           setStatus(true);

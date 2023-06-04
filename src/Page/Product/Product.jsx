@@ -45,29 +45,6 @@ const Product = () => {
         });
     }
   }, [id]);
-  //   {
-  //     "phone": "123456789",
-  //     "name": "John Doe",
-  //      "networks": "telegram "
-  //     "products": [
-  //         {
-  //             "name": "Product 1",
-  //             "price": 10.99,
-  //             "quantity": 2,
-  //             "sale": 2,
-  //             "installment": true
-  //         },
-  //         {
-  //             "name": "Product 2",
-  //             "price": 19.99,
-  //             "quantity": 1,
-  //             "sale": 0,
-  //             "installment": true
-  //         }
-  //     ],
-  //     "order_total": 41.97
-
-  // }
   const addProduct = (installment) => {
     for (let item of basket) {
       if (item.id === id) {
@@ -170,13 +147,19 @@ const Product = () => {
                     <div className={style.detail__text}>{product.about_product.style}</div>
                   </div>
                 </div>
-                <div className={style.detail}>
-                  <div className={style.detail__title}>Детали</div>
-                  <div className={style.detail__row}>
-                    <div className={style.detail__subtitle}>Состав-Каркас</div>
-                    <div className={style.detail__text}>{product.frame_composition}</div>
+                {product.details.length > 1 ? (
+                  <div className={style.detail}>
+                    <div className={style.detail__title}>Детали</div>
+                    {product.details.map(({ id, name, detail }) => (
+                      <div className={style.detail__row} key={id}>
+                        <div className={style.detail__subtitle}>{name}</div>
+                        <div className={style.detail__text}>{detail}</div>
+                      </div>
+                    ))}
                   </div>
-                </div>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
             <div className={style.left}>
@@ -202,25 +185,6 @@ const Product = () => {
                     </span>
                     {(+product.price).toLocaleString('en-US').replace(',', ' ')}
                     <span className={style.sine}>₽</span>
-                  </>
-                )}
-              </div>
-              <div
-                className={style.btn}
-                onClick={(event) => {
-                  if (installment) {
-                    event.preventDefault();
-                  } else {
-                    setInstallment(true);
-                    addProduct(true);
-                  }
-                }}>
-                {installment ? (
-                  'Товар добавлен'
-                ) : (
-                  <>
-                    В Рассрочку {(+product.price / 10).toLocaleString('en-US').replace(',', ' ')}{' '}
-                    ₽/мес
                   </>
                 )}
               </div>

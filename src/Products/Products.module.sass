@@ -61,5 +61,13 @@
     top: 0
     &__right
         right: 0
+        transition: .3s linear
+        &:hover
+            transform: scale(1.2) 
+            svg
+                fill: var(--materasso)
+    &__active
+        svg
+            fill: var(--materasso)
     &__left
         left: 0
