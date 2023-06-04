@@ -1,8 +1,21 @@
 .search
     display: flex
     align-items: center
+    cursor: pointer
+    position: relative
     margin-left: 19px
     @media (max-width:768px)
         display: none
 .icon
     margin-right: 14px
+
+.input
+    left: 26px
+    height: 28px
+    width: 0px
+    opacity: 0
+    position: absolute
+    transition: .3s
+    &__active
+        width: 130px
+        opacity: 1

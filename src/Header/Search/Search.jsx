@@ -1,8 +1,32 @@
+import { useEffect, useState } from 'react';
 import style from './Search.module.sass';
+import { useNavigate } from 'react-router-dom';
+import { setSearch } from './../../redux/searchSlice/searchSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const Search = () => {
+  const [show, setShow] = useState(false);
+  const [value, setValue] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const search = useSelector((state) => state.search.search);
+  const showInput = (event) => {
+    if (event.target.tagName !== 'INPUT') {
+      setShow(!show);
+    }
+  };
+  const Search = () => {
+    dispatch(setSearch({ value: value, page: 1 }));
+    if (show && value.trim().length > 0) {
+      navigate('/search');
+    }
+  };
+  useEffect(() => {
+    setShow(false);
+    setValue('');
+  }, [search]);
   return (
-    <div className={style.search}>
-      <div className={style.icon}>
+    <div className={style.search} onClick={showInput}>
+      <div className={style.icon} onClick={Search}>
         <svg
           width="16"
           height="15"
@@ -19,6 +43,13 @@ const Search = () => {
         </svg>
       </div>
       <div className="text">Поиск</div>
+      <input
+        type="text"
+        value={value}
+        className={style.input + ' ' + (show ? style.input__active : '')}
+        onChange={(event) => setValue(event.target.value)}
+        onKeyDown={(event) => (event.key === 'Enter' ? Search() : '')}
+      />
     </div>
   );
 };

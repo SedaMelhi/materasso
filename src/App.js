@@ -21,6 +21,7 @@ import Delivery from './Page/Buyer/Payment/Delivery';
 import Services from './Page/Buyer/Payment/Services';
 import About from './Page/About/About';
 import Contacts from './Page/Contacts/Contacts';
+import Search from './Page/Search/Search';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -73,6 +74,7 @@ function App() {
           <Route path="buyer/services" element={<Services />} />
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
+          <Route path="search" element={<Search />} />
         </Routes>
       </div>
       <Footer />

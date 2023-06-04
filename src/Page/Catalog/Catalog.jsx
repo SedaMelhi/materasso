@@ -52,6 +52,7 @@ const Catalog = ({ menu }) => {
               name: name,
               subId: +params.subcategory ? params.subcategory : false,
               page: +params.page ? params.page : 1,
+
               sort: params.ordering
                 ? 'ordering'
                 : params.min_price
