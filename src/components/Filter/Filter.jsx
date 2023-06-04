@@ -62,6 +62,7 @@ const Filter = ({ category, setCategory, menu }) => {
                       name: filters.name,
                       subId: id,
                       page: 1,
+                      sort: filters.sort,
                     }),
                   );
                 }}>

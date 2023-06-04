@@ -1,25 +1,22 @@
 import { Link } from 'react-router-dom';
 import Line from '../../components/Line/Line';
 import style from './Buyer.module.sass';
+
 const Buyer = () => {
   return (
     <div className={style.container}>
-      <Line />
+      <div className={style.line}>
+        <Line />
+      </div>
       <div className={`wrap ${style.links}`}>
         <div className={style.link}>
-          <Link>Оплата</Link>
+          <Link to="payment">Оплата</Link>
         </div>
         <div className={style.link}>
-          <Link>Доставка</Link>
+          <Link to="delivery">Доставка</Link>
         </div>
         <div className={style.link}>
-          <Link>Возврат обмен</Link>
-        </div>
-        <div className={style.link}>
-          <Link>Гарантия и сервис</Link>
-        </div>
-        <div className={style.link}>
-          <Link>Инструкции по эксплуатации </Link>
+          <Link to="services">Гарантия и сервис</Link>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const catalogSlice = createSlice({
   name: 'catalog',
   initialState: {
-    filters: { categoryId: false, name: '', subId: false, page: 1 },
+    filters: { categoryId: false, name: '', subId: false, page: 1, sort: '' },
   },
   reducers: {
     setFilters(state, { payload }) {

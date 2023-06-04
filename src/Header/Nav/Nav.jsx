@@ -10,13 +10,11 @@ const Nav = () => {
             <Link to="/buyer" className={style.menu__item}>
               Покупателям
             </Link>
-            <Link to="/" className={style.menu__item}>
-              Партнерам
-            </Link>
-            <Link to="/" className={style.menu__item}>
+
+            <Link to="/about" className={style.menu__item}>
               О нас
             </Link>
-            <Link to="/" className={style.menu__item}>
+            <Link to="/contacts" className={style.menu__item}>
               Контакты
             </Link>
           </div>

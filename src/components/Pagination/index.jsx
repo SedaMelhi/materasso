@@ -19,6 +19,7 @@ const Pagination = ({ itemsPerPage, count, page, sale }) => {
           name: filters.name,
           subId: filters.subId,
           page: event.selected + 1,
+          sort: filters.sort,
         }),
       );
     }

@@ -1,0 +1,90 @@
+.wrap
+    margin-top: 48px
+    display: flex
+    justify-content: space-between
+    color: #000
+    line-height: 1.5rem
+    @media (max-width: 768px)
+        flex-direction: column
+        
+.title
+    font-size: 3rem
+    line-height: 4rem
+    color: var(--text)
+    margin-bottom: 24px
+    @media (max-width: 768px)
+        font-size: 2rem
+        line-height: 3rem
+        width: 100%
+.left
+    max-width: 481px
+    margin-right: 36px
+    @media (max-width: 768px)
+        margin: 0
+        width: 100%
+.right
+    max-width: 638px
+    border: 1px solid #CED3D6
+    border-radius: 24px
+    padding: 24px 32px
+    margin-left: 36px
+    @media (max-width: 768px)
+        margin: 32px 0 0
+    @media (max-width: 560px)
+        border-radius: 15px
+.text
+    font-size: 1.25rem
+    line-height: 2rem
+.subtitle
+    font-size: 1.5rem
+    line-height: 2rem
+    color: var(--text)
+    font-weight: 500
+    margin-bottom: 16px
+.list
+    padding-left: 30px
+    margin-bottom: 16px
+.item
+    list-style-type: circle
+.description
+    margin-bottom: 16px
+.line
+    margin: 24px 0
+.table__item
+    width: 150px
+.table
+    width: 75.4%
+    border-collapse: collapse
+    margin-bottom: 32px
+    &__mobile
+        display: none
+        @media (max-width: 560px)
+            display: block
+            margin-bottom: 10px
+    &__pc
+        @media (max-width: 560px)
+            display: none
+    @media (max-width: 1060px)
+        width: 95%
+    @media (max-width: 768px)
+        width: 468px
+    @media (max-width: 640px)
+        width: 95%
+    th
+        font-size: 1.25rem
+        line-height: 2rem
+        font-weight: 400
+        color: #818F9F
+        border-bottom: 1px solid var(--stroke)
+        padding: 16px 0
+        width: 50%
+        text-align: left
+    td
+        border-bottom: 1px solid var(--stroke)
+        padding: 16px 0
+        width: 50%
+.right__title
+    margin-bottom: 16px
+    &_firts
+        @media (max-width: 560px)
+            margin-top: 32px

@@ -2,9 +2,15 @@
     padding-top: 32px
 .links
     margin-top: 48px
-
+    @media (max-width: 768px)
+        margin-top: 0
+.line
+    @media (max-width: 768px)
+        display: none
 .link
     margin-bottom: 10px
     color: var(--materasso)
     font-size: 1.25rem
     line-height: 2rem
+    &:hover
+        text-decoration: underline

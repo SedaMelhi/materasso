@@ -28,6 +28,7 @@ const CollectionCatalog = () => {
   const [colors, setColors] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [styles, setStyles] = useState([]);
+  const [image, setImages] = useState('');
   const getData = () => {
     let params = `?page=${filters.page}&collection=${filters.collection}`;
     if (filters.material !== '') {
@@ -46,7 +47,6 @@ const CollectionCatalog = () => {
       params += `&min_price=${filters.price.min}`;
     }
     if (filters.quantity !== '') {
-      console.log(filters.quantity);
       if (filters.quantity === 'В наличии') {
         params += `&quantity=1`;
       }
@@ -56,6 +56,11 @@ const CollectionCatalog = () => {
       .then((data) => {
         setCatalog(data);
         setLoad(true);
+      });
+    fetch('https://sadogroup.ru/api/collection/')
+      .then((res) => res.json())
+      .then((data) => {
+        setImages(data.results.filter(({ id }) => id === filters.collection)[0].images[0].image);
       });
     navigate(params);
   };
@@ -119,6 +124,7 @@ const CollectionCatalog = () => {
       }),
     );
   };
+
   return (
     <div className={collection.wrap + ' wrap'}>
       <div className={style.path}>
@@ -138,7 +144,7 @@ const CollectionCatalog = () => {
       <div
         className={collection.image}
         style={{
-          backgroundImage: `url(${collectionObj.images[0].image})`,
+          backgroundImage: `url(${image})`,
         }}></div>
       <div className={collection.title}>Коллекция {collectionObj.name}</div>
       <div className={collection.description}>{collectionObj.description}</div>

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setFilters } from '../../../redux/collectionSlice/collectionSlice';
 
-const Section = ({ name, id, images, short_description, description, load, link }) => {
+const Section = ({ name, id, images, step, short_description, description, load, link }) => {
   const dispatch = useDispatch();
   const bg = load
     ? {
@@ -37,7 +37,7 @@ const Section = ({ name, id, images, short_description, description, load, link 
   };
   return load ? (
     <section>
-      <div className={`${style.section} ${id % 2 === 1 ? style.section__reverse : ''}`}>
+      <div className={`${style.section} ${step % 2 === 1 ? style.section__reverse : ''}`}>
         <div
           className={style.section__left}
           data-aos="fade-up"

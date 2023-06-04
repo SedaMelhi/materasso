@@ -15,21 +15,42 @@ import { setFilters } from './../../redux/catalogSlice/catalogSlice';
 
 const Sale = ({ menu }) => {
   const [data, setData] = useState({ results: [] });
-  const [sort, setSort] = useState('Сначала новые');
+  const [sort, setSort] = useState({ value: 'Сначала новые', id: 0 });
   const [load, setLoad] = useState(false);
   const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
   const page = useSelector((state) => state.sale.page);
   const dispatch = useDispatch();
-
+  const filters = useSelector((state) => state.catalog.filters);
   const getData = () => {
-    fetch('https://sadogroup.ru/api/product/?sale__gt=0&page=' + page)
+    setUpdate(false);
+    fetch(
+      'https://sadogroup.ru/api/product/?sale__gt=0&page=' +
+        page +
+        (filters.sort !== ''
+          ? filters.sort === 'ordering'
+            ? '&ordering=-date'
+            : filters.sort === 'max'
+            ? '&max_price=999999999&min_price=0'
+            : ''
+          : ''),
+    )
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoad(true);
       });
-    navigate('?page=' + page);
+    navigate(
+      '?page=' +
+        page +
+        (filters.sort !== ''
+          ? filters.sort === 'ordering'
+            ? '&ordering=-date'
+            : filters.sort === 'max'
+            ? '&max_price=999999999&min_price=0'
+            : ''
+          : ''),
+    );
   };
   useEffect(() => {
     setLoad(false);
@@ -43,11 +64,50 @@ const Sale = ({ menu }) => {
       dispatch(setPage(+params.page));
     }
     setUpdate(true);
-    dispatch(setFilters({ categoryId: false, name: '', subId: false, page: 1 }));
+    dispatch(setFilters({ categoryId: false, name: '', subId: false, page: 1, sort: '' }));
     return () => {
       dispatch(setPage(1));
     };
   }, []);
+  useEffect(() => {
+    if (sort.id === 0) {
+      setUpdate(true);
+      dispatch(
+        setFilters({
+          categoryId: filters.categoryId,
+          name: filters.name,
+          subId: filters.subId,
+          page: 1,
+          sort: 'ordering',
+        }),
+      );
+    }
+    if (sort.id === 1) {
+      setUpdate(true);
+      dispatch(
+        setFilters({
+          categoryId: filters.categoryId,
+          name: filters.name,
+          subId: filters.subId,
+          page: 1,
+          sort: 'max',
+        }),
+      );
+    }
+    if (sort.id === 2) {
+      setUpdate(true);
+      dispatch(
+        setFilters({
+          categoryId: filters.categoryId,
+          name: filters.name,
+          subId: filters.subId,
+          page: 1,
+          sort: 'min',
+        }),
+      );
+    }
+  }, [sort]);
+
   return (
     <div className={style.sale + ' wrap'}>
       <Path
@@ -57,13 +117,10 @@ const Sale = ({ menu }) => {
         ]}
       />
       <Title title="Распродажа" />
-      {/* <Breadcrumbs category={category} setCategory={setCategory} /> */}
       <Line />
       <div className={style.top}>
-        {/* <Filter setCategory={setCategory} category={category} menu={menu} sale={true} /> */}
         <Sort sort={sort} setSort={setSort} />
       </div>
-
       {load ? (
         <Products products={data.results} />
       ) : (
@@ -83,11 +140,8 @@ const Sale = ({ menu }) => {
           ))}
         </div>
       )}
-      <button className={style.btn}>Показать ещё</button>
-      <div className={style.count}>
-        <span className={style.count__show}>33</span> /{' '}
-        <span className={style.count__all}>108</span> товаров
-      </div>
+      {data.count > 9 ? <button className={style.btn}>Показать ещё</button> : ''}
+
       {data.count > 9 ? (
         <Pagination
           itemsPerPage={9}

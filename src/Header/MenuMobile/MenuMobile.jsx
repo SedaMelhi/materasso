@@ -37,9 +37,8 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
       // { name: 'Мягкая мебель', link: '/' },
       // { name: 'Обеденные группы', link: '/' },
       { name: 'Покупателям', link: '/buyer' },
-      { name: 'Партнерам', link: '/' },
-      { name: 'О нас', link: '/' },
-      { name: 'Контакты', link: '/' },
+      { name: 'О нас', link: '/about' },
+      { name: 'Контакты', link: '/contacts' },
     ],
     [],
   );
@@ -82,7 +81,7 @@ const MenuMobile = ({ menuState, catalog, setMenuOpen }) => {
   }, [data, catalog]);
   useEffect(() => {}, [filters, menu]);
   const changeId = (id, name) => {
-    dispatch(setFilters({ categoryId: id, name: name, subId: false, page: 1 }));
+    dispatch(setFilters({ categoryId: id, name: name, subId: false, page: 1, sort: filters.sort }));
   };
   return (
     <div className={style.menu__wrap}>

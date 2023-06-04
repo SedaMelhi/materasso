@@ -61,11 +61,13 @@ const Order = () => {
       products: [...arrBasket],
       order_total: order_total,
     };
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newData),
     };
+    console.log(newData);
     fetch('https://sadogroup.ru/api/send_email/', requestOptions)
       .then((response) => {
         if (response.ok) {
@@ -90,7 +92,7 @@ const Order = () => {
           setStatus(true);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setLoad(false);
         setStatus(true);
       });

@@ -16,6 +16,7 @@ const Breadcrumbs = ({ category, setCategory }) => {
             name: filters.name,
             subId: false,
             page: 1,
+            sort: filters.sort,
           }),
         );
       }}>

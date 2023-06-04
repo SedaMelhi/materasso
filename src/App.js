@@ -16,6 +16,11 @@ import Collection from './Page/Collection/Collection';
 import CollectionCatalog from './Page/CollectionCatalog/CollectionCatalog';
 import { useSelector } from 'react-redux';
 import Buyer from './Page/Buyer';
+import Payment from './Page/Buyer/Payment/Payment';
+import Delivery from './Page/Buyer/Payment/Delivery';
+import Services from './Page/Buyer/Payment/Services';
+import About from './Page/About/About';
+import Contacts from './Page/Contacts/Contacts';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -63,6 +68,11 @@ function App() {
           <Route path="collection" element={<Collection />} />
           <Route path="collcatalog" element={<CollectionCatalog />} />
           <Route path="buyer" element={<Buyer />} />
+          <Route path="buyer/payment" element={<Payment />} />
+          <Route path="buyer/delivery" element={<Delivery />} />
+          <Route path="buyer/services" element={<Services />} />
+          <Route path="about" element={<About />} />
+          <Route path="contacts" element={<Contacts />} />
         </Routes>
       </div>
       <Footer />

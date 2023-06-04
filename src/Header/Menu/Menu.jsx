@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from './../../redux/catalogSlice/catalogSlice';
 import DropMenu from './DropMenu/DropMenu';
 
@@ -7,6 +7,7 @@ import style from './Menu.module.sass';
 
 const Menu = ({ menu }) => {
   const dispatch = useDispatch();
+  const filters = useSelector((state) => state.catalog.filters);
   return (
     <div className="wrap">
       <div className={style.menu__wrap}>
@@ -44,6 +45,7 @@ const Menu = ({ menu }) => {
                             name: item.name_category,
                             subId: false,
                             page: 1,
+                            sort: filters.sort,
                           }),
                         );
                       }}>

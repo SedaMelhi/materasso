@@ -15,7 +15,7 @@ const Sort = ({ sort, setSort }) => {
         setSelectShow(false);
       }}>
       <div className={style.filter__wrap}>
-        <div className={style.filter}>{sort}</div>
+        <div className={style.filter}>{sort.value}</div>
         <div className={style.arrow + ' ' + (selectShow ? style.arrow__close : '')}>
           <ArrowSvg />
         </div>
@@ -27,7 +27,7 @@ const Sort = ({ sort, setSort }) => {
             className={style.select__item}
             htmlFor={'select0' + i}
             onClick={(event) => {
-              setSort(event.target.innerText);
+              setSort({ value: event.target.innerText, id: i });
             }}>
             <input
               type="radio"

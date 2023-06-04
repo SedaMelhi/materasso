@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import style from './../Menu.module.sass';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from './../../../redux/catalogSlice/catalogSlice';
 import { setPage } from '../../../redux/saleSlice/saleSlice';
 const DropMenu = ({ menu, catalog, name }) => {
   const dispatch = useDispatch();
-
+  const filters = useSelector((state) => state.catalog.filters);
   return (
     <div className={style.dropdown__wrap}>
       {catalog ? (
@@ -26,6 +26,7 @@ const DropMenu = ({ menu, catalog, name }) => {
                               name: item.name_category,
                               subId: false,
                               page: 1,
+                              sort: filters.sort,
                             }),
                           );
                           dispatch(setPage(1));
@@ -53,6 +54,7 @@ const DropMenu = ({ menu, catalog, name }) => {
                     name: name_category,
                     subId: false,
                     page: 1,
+                    sort: filters.sort,
                   }),
                 );
               }}>

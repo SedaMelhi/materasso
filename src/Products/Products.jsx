@@ -23,6 +23,7 @@ const Products = ({ products, catalog }) => {
                         name: name_category,
                         subId: false,
                         page: 1,
+                        sort: '',
                       }),
                     );
                   }

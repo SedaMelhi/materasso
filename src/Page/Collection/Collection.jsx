@@ -26,7 +26,7 @@ const Collection = () => {
       />
       <h2 className={style.title}>Коллекции</h2>
       {load ? (
-        collections.map((item) => <Section {...item} key={item.id} load={load} />)
+        collections.map((item, i) => <Section {...item} step={i} key={item.id} load={load} />)
       ) : (
         <>
           <Section load={load} />

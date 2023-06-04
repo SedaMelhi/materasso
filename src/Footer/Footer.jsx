@@ -27,13 +27,10 @@ const Footer = () => {
               </Link>
             </div>
             <div className={style.column}>
-              <Link to="/" className={style.link}>
-                Партнерам
-              </Link>
-              <Link to="/" className={style.link}>
+              <Link to="/about" className={style.link}>
                 О нас
               </Link>
-              <Link to="/" className={style.link}>
+              <Link to="/contacts" className={style.link}>
                 Контакты
               </Link>
             </div>
@@ -83,7 +80,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="https://instagram.com/materasso_official?igshid=YmMyMTA2M2Y="
-                  className={style.network + ' ' + style.in}>
+                  className={style.network + ' ' + style.inst}>
                   <svg
                     width="16"
                     height="16"

@@ -17,9 +17,15 @@ const Catalog = ({ menu }) => {
   const [load, setLoad] = useState(false);
   const getData = () => {
     if (filters.categoryId !== false) {
-      const params =
+      let params =
         `?page=${filters.page}&category=${filters.categoryId}` +
         (filters.subId !== false ? `&subcategory=${filters.subId}` : '');
+      if (filters.sort === 'ordering') {
+        params += '&ordering=-date';
+      }
+      if (filters.sort === 'max') {
+        params += '&max_price=999999999&min_price=0';
+      }
       fetch('https://sadogroup.ru/api/product/' + params)
         .then((res) => res.json())
         .then((data) => {
@@ -29,6 +35,7 @@ const Catalog = ({ menu }) => {
       navigate(params);
     }
   };
+
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -42,6 +49,7 @@ const Catalog = ({ menu }) => {
               name: name,
               subId: +params.subcategory ? params.subcategory : false,
               page: +params.page ? params.page : 1,
+              sort: params.ordering ? 'ordering' : '',
             }),
           );
         });

@@ -3,7 +3,7 @@
     z-index: 4
     width: 100%
     transition: .5s
-    min-height: 100vh
+    min-height: calc(100vh - 144px)
     background-color: #fff
     padding-bottom: 70px
     transform: translateX(-100vw)
@@ -11,7 +11,9 @@
     display: none
     @media(max-width: 768px) 
         display: block
-        
+        min-height: calc(100vh - 171.8px)
+    @media(max-width: 560px) 
+        min-height: calc(100vh - 144px)
     
 
 .menu
