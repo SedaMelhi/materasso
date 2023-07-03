@@ -23,6 +23,7 @@ const Section = ({ name, id, images, step, short_description, description, load,
     AOS.init();
   }, []);
   const changeFilters = () => {
+    console.log('asdsad');
     dispatch(
       setFilters({
         page: 1,
@@ -66,7 +67,7 @@ const Section = ({ name, id, images, step, short_description, description, load,
           <div className="img" style={bg}></div>
         </div>
         <div className={style.btn__mobile}>
-          <Link to="catalog">
+          <Link to="../collcatalog" onClick={changeFilters}>
             <Button text="Подробнее" />
           </Link>
         </div>
