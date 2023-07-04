@@ -1,5 +1,6 @@
 import style from './Filter.module.sass';
 import ArrowSvg from '../../assets/svg/ArrowSvg';
+import qs from 'qs';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { setFilters } from './../../redux/catalogSlice/catalogSlice';
@@ -18,6 +19,12 @@ const Filter = ({ category, setCategory, menu }) => {
       });
     });
   }, [filters, menu]);
+  useEffect(() => {
+    const params = qs.parse(window.location.search.substring(1));
+    if (filterItems.length !== 0 && +params.subcategory >= 0) {
+      setCategory(filterItems.filter(({ id }) => id === +params.subcategory)[0].name);
+    }
+  }, [filterItems]);
 
   return (
     <div className={style.wrap}>
