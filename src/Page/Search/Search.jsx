@@ -17,7 +17,6 @@ const Search = () => {
   const dispatch = useDispatch();
   const getData = () => {
     if (search.value.trim().length > 0) {
-      console.log('https://sadogroup.ru/api/product/?name__icontains=' + search.value);
       fetch('https://sadogroup.ru/api/product/?name__icontains=' + search.value)
         .then((res) => res.json())
         .then((data) => {

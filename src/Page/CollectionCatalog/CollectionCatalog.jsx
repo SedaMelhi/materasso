@@ -60,7 +60,7 @@ const CollectionCatalog = () => {
     fetch('https://sadogroup.ru/api/collection/')
       .then((res) => res.json())
       .then((data) => {
-        setImages(data.results.filter(({ id }) => id === filters.collection)[0].images[0].image);
+        setImages(data.filter(({ id }) => id === filters.collection)[0].images[0].image);
       });
     navigate(params);
   };

@@ -11,7 +11,7 @@ const Home = () => {
     fetch('https://sadogroup.ru/api/collection/')
       .then((res) => res.json())
       .then((data) => {
-        setCollections(data.results);
+        setCollections(data);
         setLoad(true);
       });
   }, []);

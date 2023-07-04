@@ -53,7 +53,6 @@ function App() {
     const json = JSON.stringify(basket);
     localStorage.setItem('basket', json);
   }, [basket]);
-
   return (
     <div className="App">
       <Header menu={menu} />

@@ -23,7 +23,6 @@ const Section = ({ name, id, images, step, short_description, description, load,
     AOS.init();
   }, []);
   const changeFilters = () => {
-    console.log('asdsad');
     dispatch(
       setFilters({
         page: 1,

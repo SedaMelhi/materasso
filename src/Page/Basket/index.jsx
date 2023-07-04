@@ -21,6 +21,19 @@ const Basket = () => {
       for (const item of basket) {
         const response = await fetch(`https://sadogroup.ru/api/product/?id=${item.id}`);
         const result = await response.json();
+        if (result.count === 0) {
+          if (basket.length === 1) {
+            const json = JSON.stringify([]);
+            localStorage.setItem('basket', json);
+          } else {
+            const basketDate = basket.filter((product) => item.id !== product.id);
+            const json = JSON.stringify(basketDate);
+            localStorage.setItem('basket', json);
+            dispatch(setBasket(basketDate));
+          }
+
+          return false;
+        }
         const product = {
           ...result.results[0],
           countProducts: item.count,
